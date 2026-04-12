@@ -5,7 +5,6 @@ Sistema operativo de salud femenina longitudinal.
 ## Documentación
 
 ### Fuentes del proyecto
-- [Manifiesto](docs/fuentes/ITABEY%20%20-%20MANIFIESTO%20(1).pdf)
 - [Pitch Deck](docs/fuentes/Itabey-Pitch-Deck.pdf)
 - [Doc Pool](docs/fuentes/Doc%20Pool.pdf)
 
