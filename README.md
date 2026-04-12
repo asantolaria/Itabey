@@ -5,6 +5,7 @@ Sistema operativo de salud femenina longitudinal.
 ## Documentación
 
 ### Fuentes del proyecto
+- Manifiesto — disponible en el mail recibido en alex.carter15@gmail.com (mar, 24 feb, 19:50)
 - [Pitch Deck](docs/fuentes/Itabey-Pitch-Deck.pdf)
 - [Doc Pool](docs/fuentes/Doc%20Pool.pdf)
 
