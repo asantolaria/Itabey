@@ -1,10 +1,13 @@
 # Itabey / Asha — Product Requirements Document
 
-**Revisión:** 1
-**Fecha de revisión:** 2026-05-04
+**Revisión:** 2
+**Fecha de revisión:** 2026-05-08
 **Autor:** Alex Santolaria (consultor técnico) + Maia (Flora · Forrest · Iris · Spark · Melody)
 **Estado:** Draft — para evaluación de proveedores
 **Documento fuente:** `docs/fuentes/Documento de Requerimientos Funcionales_ Itabey _ Asha.md` (CEO de Itabey, v1.0)
+**Cambios desde Rev 1:** Feedback de la CEO incorporado en dos rondas:
+- *Ronda 1 (tácticos):* matriz explícita de fases (§ 1.4), separación calendario interno vs sincronización bidireccional con externos (FR-303 vs FR-106), gestión de cuentas B2C + B2B con migración sin pérdida de datos (§ 3.13), vídeo explicativo en producto (FR-702), perfil profesional gestor de pacientes como preparación arquitectónica Fase 3 (FR-1305), preparación HL7/FHIR explicitada (E15, NFR-M), soporte y mantenimiento post-launch como sección NFR propia (§ 4.10).
+- *Ronda 2 (estratégicos):* modelo de **tiers de profundidad modulares** elevado a compromiso arquitectónico de primer nivel (§ 1.5, FR-1306, FR-1307), modularidad funcional como NFR (NFR-SC06–SC07), capacidad de activación dinámica de funcionalidades como criterio de evaluación de proveedores (§ 12), reformulación de la pregunta abierta Q6 al alinearse con la tesis de modularidad de Mariela.
 
 > Este PRD reformula el documento de requerimientos funcionales de la CEO en estructura PRD para servir como base de evaluación de propuestas de proveedores de desarrollo. Los valores marcados con 🏷️ **PROPUESTA** son inferencias técnicas pendientes de validación por la CEO. Las decisiones marcadas con 🛡️ **INNEGOCIABLE** derivan directamente del documento fuente y no son negociables sin autorización de la CEO.
 
@@ -37,12 +40,77 @@ El valor central del producto **no reside en la captura de datos**, sino en su c
 |----|-------------|-------|
 | NG1 | 🛡️ **Diagnóstico clínico** | Asha no diagnostica, no prescribe, no sustituye consulta médica (sec. 3.3 fuente) |
 | NG2 | Marcado CE / clasificación como dispositivo médico (MDR) en MVP | Fuera de alcance temporal y presupuestario; arquitectura debe permitirlo a futuro |
-| NG3 | Cumplimiento HL7/FHIR en MVP | Arquitectura debe permitir mapeo posterior sin rediseño estructural |
+| NG3 | Cumplimiento HL7/FHIR en MVP | Fuera de MVP. **Sí está exigido** que la arquitectura permita mapeo posterior sin rediseño estructural — ver § 4.10, NFR-M, E15 en § 12.2 |
 | NG4 | Vertical de deporte femenino en MVP | Diferida a fase 2; arquitectura debe reservar superficie de integración |
 | NG5 | White-label / licenciamiento API de Asha en MVP | Diferido; arquitectura debe permitirlo desde el inicio (sec. 4.4 fuente) |
 | NG6 | 🛡️ **Venta de datos personales o explotación comercial de información individual** | Compromiso ético/RGPD del producto |
 | NG7 | Wearables avanzados (Whoop, Oura más allá de datos básicos) en MVP | Integraciones iniciales: Apple Health + Google Health Connect |
 | NG8 | Investigación científica activa con instituciones en MVP | Arquitectura preparada, ejecución diferida |
+
+### 1.4 Organización por fases del producto
+
+> Esta sección hace explícito el alcance temporal del producto. Cada FR del § 3 mantiene su prioridad MoSCoW (Must/Should/Could) — la prioridad indica **lo importante dentro de su fase**; la fase indica **cuándo se entrega**. La intención: que ni el equipo interno ni los proveedores mezclen niveles al evaluar propuestas.
+
+| Fase | Horizonte | Alcance |
+|------|-----------|---------|
+| **Fase 1 — MVP** | Lanzamiento inicial | Funcionalidades core que validan la propuesta de valor: registro estructurado, conversación Asha con RAG, calendario interno, panel principal, informes básicos, onboarding, privacidad y seguridad completas, dashboards mínimos, integraciones de salud iniciales (Apple Health + Google Health Connect), detección de riesgo y hard-stop |
+| **Fase 2 — Post-MVP cercano** | 3–9 meses post-lanzamiento | Comunidad moderada, panel de autoconocimiento avanzado, mapa corporal, panel compartido (FR-305), dashboards completos, sincronización bidireccional con calendarios externos (FR-106), informes para profesionales (FR-402, FR-403), módulos de enfoque (FR-603), notificaciones suaves (FR-801), gestión completa de cuentas B2B (§ 3.13) |
+| **Fase 3 — Futuro** | 12+ meses | Vertical de deporte femenino, perfil profesional gestor de pacientes (FR-1305), licenciamiento API y white-label de Asha, integración con wearables avanzados (Whoop, Oura completo, Garmin), mapeo a HL7/FHIR, investigación científica activa con instituciones |
+
+#### 1.4.1 Resumen por área funcional
+
+| Área | MVP (Fase 1) | Post-MVP (Fase 2) | Futuro (Fase 3) |
+|------|--------------|-------------------|-----------------|
+| Registro y captura | FR-101, FR-102, FR-104 (Apple Health + Google Health Connect), FR-105 | FR-103 (modo solo voz), FR-106 (sync bidireccional calendarios) | FR-104 wearables avanzados, mapeo HL7/FHIR |
+| Asha conversacional | FR-201 a FR-209 | FR-210 (API interna estable) | API pública / white-label |
+| Paneles | FR-301, FR-303 | FR-302, FR-304, FR-305 | — |
+| Calendario | FR-303 (interno) | FR-106 (sync bidireccional con externos) | — |
+| Informes | FR-401 | FR-402, FR-403 | — |
+| Comunidad y contenido | FR-502 (catálogo inicial reducido) | FR-501, FR-503 (si hay podcast) | — |
+| Personalización | FR-601, FR-602 | FR-603 | — |
+| Onboarding y ayuda | FR-701, FR-702 (vídeo explicativo) | — | — |
+| Notificaciones | — | FR-801 | — |
+| Privacidad | FR-901 a FR-905 | — | — |
+| Dashboards internos | FR-1001 (mínimo), FR-1002 (parcial) | FR-1001 (completo), FR-1002 (completo), FR-1003, FR-1004, FR-1005 | — |
+| Integraciones | FR-1101, FR-1103 (arquitectura abierta) | FR-1102 (calendarios externos completo) | HL7/FHIR, integración con perfiles profesionales gestores |
+| Detección de riesgo | FR-1201 | — | — |
+| Gestión de cuentas | FR-1301 (cuenta única), FR-1302 (free + individual), FR-1303 (migración free↔individual), FR-1306 (capacidad de tiering, sin contenido prescriptivo), FR-1307 (feature flags básicos) | FR-1302 (B2B), FR-1303 (B2B), FR-1304 (privacidad B2B), FR-1306 (tiers operativos) | FR-1305 (perfil profesional gestor multi-usuaria) |
+
+> **Regla de evaluación de propuestas:** Las propuestas de proveedores deben presentar **fases coherentes con esta tabla**. Una propuesta que mezcle Fase 1 con Fase 2 sin distinción explícita debe corregirse antes de comparar costes.
+
+### 1.5 Modelo de tiers de profundidad y modularidad estratégica
+
+> **Compromiso arquitectónico de primer nivel.** El sistema **debe nacer modular**: capaz de soportar distintos niveles de profundidad y acceso desde el día 1, aunque externamente se sienta como un único producto coherente. Esta sección eleva la modularidad funcional al rango de los principios de Privacy by design y Security by design.
+
+#### 1.5.1 Por qué importa
+
+Itabey opera en un mercado híbrido B2C + B2B con necesidades fundamentalmente distintas:
+
+- **Cliente corporativo (B2B):** compra **bienestar, prevención, engagement** para empleadas. Requiere herramienta sólida, fácil de implementar, predecible operacionalmente. **No** necesita toda la profundidad introspectiva longitudinal del producto.
+- **Usuaria individual (B2C):** busca **autoconocimiento profundo, personalización, acompañamiento longitudinal, análisis de patrones, memoria contextual**. Es la *power user* de mayor LTV potencial.
+
+Si el sistema entrega todo el avanzado al B2B desde el inicio, los riesgos son materiales: contratos de volumen a precios bajos contra costes crecientes de infraestructura/IA, *power users* sin upgrade path natural, márgenes erosionados, pérdida de flexibilidad estratégica de pricing futuro.
+
+Si el sistema **nace modular**, la organización gana: experiencia corporativa potente sin disparar costes estructurales, B2B como canal de adquisición masiva con CAC bajo, upgrades individuales naturales hacia tiers premium, mayor LTV/margen medio por usuaria, capacidad de adaptar planes y verticales sin rehacer producto.
+
+#### 1.5.2 Qué exige al sistema
+
+El PRD **no prescribe** qué funcionalidades irán en qué tier — esa decisión se diferirá hasta tener señal real de uso. Lo que sí exige es la **capacidad arquitectónica** para que esa decisión, cuando se tome, sea trivial de implementar:
+
+1. **Activación/desactivación de funcionalidades por usuaria, cohorte o tier** sin cambios de código (feature flags como capacidad de primera clase — FR-1307).
+2. **Capas de profundidad de Asha** parametrizables: profundidad de memoria de largo plazo, número de patrones detectados, frecuencia de insights, tipo de personalización disponible — todo configurable por tier sin rediseño (FR-1306).
+3. **Tiers de uso de recursos**: cuotas configurables por tier sobre llamadas a LLM, almacenamiento vectorial, tokens de inferencia, procesamiento de voz. Ningún tier consume recursos ilimitados sin cap.
+4. **Permisos modulares** por funcionalidad y por persona, no por rol monolítico. Una usuaria del tier "estándar B2B" puede tener acceso parcial a funcionalidades premium si la organización lo costea, sin crear un nuevo rol estático.
+5. **Adaptación de verticales** (deporte, perfil profesional, etc.) como activación de módulos sobre la base común, no como ramas paralelas del producto.
+
+#### 1.5.3 Lo que aún no se decide aquí
+
+- Qué funcionalidades exactas van en qué tier (decisión post-MVP, basada en señal de uso real).
+- Nombres comerciales de los tiers (decisión de marketing).
+- Precios por tier (decisión comercial de la CEO).
+- Qué tier reciben las empleadas de un cliente B2B concreto (decisión por contrato).
+
+> **Regla de evaluación de propuestas:** Una propuesta de proveedor que entregue arquitectura monolítica con permisos por rol fijo **no cumple** este PRD, aunque cumpla todos los FRs individualmente. La capacidad de tiering modular se evalúa explícitamente — ver § 12.4.
 
 ---
 
@@ -103,6 +171,8 @@ El valor central del producto **no reside en la captura de datos**, sino en su c
 
 > **Nota transversal — Modo neurodivergente:** No es persona, es **modo de uso transversal** que cualquier persona (P1–P4) puede activar (sec. 14.2 fuente). Se trata como restricción de UX no opcional para el MVP (NFR-A).
 
+> **Nota arquitectónica — P7, Profesional gestor de pacientes (Fase 3):** Distinta de **P5 — Dra. Elena** (que valida conocimiento clínico para todo el sistema), una persona futura **P7** representa profesionales (sanitarios, trabajadores sociales, *coaches* de salud) que accederían al sistema para gestionar varias usuarias/pacientes que les hayan dado consentimiento explícito. Esta persona **no forma parte del MVP ni de Fase 2**, pero el sistema de roles y permisos (FR-1305, NFR-S04) y el modelo de consentimiento granular (FR-904) deben dejarla habilitada arquitectónicamente desde el inicio.
+
 ---
 
 ## 3. Requisitos funcionales
@@ -150,12 +220,24 @@ El valor central del producto **no reside en la captura de datos**, sino en su c
   - Datos importados separados de datos manuales (trazabilidad de origen).
   - Reconciliación clara cuando hay datos manuales y de wearable para el mismo evento.
 
-#### FR-105 — Importación desde calendarios externos
-- **Prioridad:** Should
-- **Descripción:** Integración bidireccional configurable con Google Calendar y Apple Calendar.
+#### FR-105 — Importación de eventos desde calendarios externos
+- **Prioridad:** Should (MVP / Fase 1)
+- **Descripción:** Importación unidireccional de eventos relevantes desde Google Calendar y Apple Calendar (citas médicas, eventos vitales, viajes) hacia el panel calendario interno (FR-303).
 - **Criterios de aceptación:**
-  - Activación voluntaria, ofuscación de datos sensibles configurable, desactivación inmediata.
-  - Iconos discretos en eventos sincronizados.
+  - Activación voluntaria por la usuaria, granularidad de qué calendarios se leen.
+  - Ofuscación configurable de títulos/descripciones sensibles antes de importar.
+  - Desactivación inmediata; eventos importados se eliminan a petición.
+
+#### FR-106 — Sincronización bidireccional con calendarios externos (Fase 2)
+- **Prioridad:** Should (Fase 2)
+- **Descripción:** Sincronización bidireccional con Google Calendar y Apple Calendar que **publica la fase del ciclo y eventos relevantes** del calendario interno hacia el calendario externo de la usuaria, para facilitar planificación sin abrir la app.
+- **Criterios de aceptación:**
+  - **Visualización configurable** en el calendario externo: la usuaria elige entre invisibilidad total, icono pequeño y discreto por día, código de color, etiqueta de texto, o combinaciones.
+  - Sincronización de fases del ciclo (menstruación, ovulación estimada, fertilidad estimada, fase lunar si activa) y, opcionalmente, recordatorios suaves seleccionados.
+  - **Privacidad por defecto:** sin sincronización inicial — opt-in explícito y reversible.
+  - **No** se exportan datos sensibles (síntomas, ánimo, conversaciones con Asha) bajo ningún concepto.
+  - Desactivación inmediata limpia todos los eventos exportados sin retención.
+  - Compatibilidad con calendarios compartidos: la usuaria controla si los eventos exportados son visibles para terceros que comparten su calendario.
 
 ### 3.2 Motor conversacional Asha (FR-2xx)
 
@@ -251,9 +333,11 @@ El valor central del producto **no reside en la captura de datos**, sino en su c
 - **Prioridad:** Should (MVP) / Must (post-MVP)
 - **Contenido:** Patrones detectados, evolución longitudinal, comparaciones entre ciclos y periodos, métricas de mejora/empeoramiento, gráficos temporales, historial de recomendaciones, objetivos personales y sugeridos, evaluación de cumplimiento, insights de Asha.
 
-#### FR-303 — Panel calendario
+#### FR-303 — Panel calendario interno
 - **Prioridad:** Must
-- **Contenido:** Ciclo hormonal, menstruación, ovulación estimada, fertilidad estimada, estados energéticos, fase lunar, eventos manuales, síntomas relevantes, predicciones suaves, configuración de elementos visibles. Integraciones con Google/Apple Calendar configurables.
+- **Descripción:** Calendario propio de Itabey. Es la **vista canónica** de la información cíclica de la usuaria dentro de la app — todos los datos longitudinales del ciclo viven aquí.
+- **Contenido:** Ciclo hormonal, menstruación, ovulación estimada, fertilidad estimada, estados energéticos, fase lunar, eventos manuales, síntomas relevantes, predicciones suaves, configuración de elementos visibles.
+- **Distinción explícita:** La sincronización con calendarios externos (Google/Apple) no es parte de este FR. Se especifica como integración separada en FR-105 (importación de eventos, MVP) y FR-106 (sync bidireccional con visualización de fase del ciclo en el calendario externo, Fase 2).
 
 #### FR-304 — Panel corporal
 - **Prioridad:** Should
@@ -338,6 +422,17 @@ El valor central del producto **no reside en la captura de datos**, sino en su c
   - Ningún paso del onboarding satura a la usuaria con > 3 decisiones simultáneas.
   - El consentimiento es granular (no checkbox global) y revocable.
 
+#### FR-702 — Vídeo explicativo del producto integrado
+- **Prioridad:** Should (MVP)
+- **Descripción:** Vídeo corto (< 3 min) explicando el funcionamiento de la app, accesible desde el flujo de onboarding (skippable) y desde un menú permanente de ayuda (re-visible cuando la usuaria lo solicite).
+- **Criterios de aceptación:**
+  - Disponible al menos en español e inglés (NFR-I01).
+  - Subtítulos cerrados (CC) por defecto activables (NFR-A03).
+  - Saltable en cualquier momento durante el onboarding sin penalización en el flujo.
+  - Re-visible desde menú de ayuda → "¿Cómo funciona Itabey?".
+  - Reproducción funciona offline si el vídeo está en caché.
+- **Nota sobre alcance:** Este FR cubre el reproductor, la integración en producto y la accesibilidad. La **producción del contenido del vídeo** (guion, locución, animación) es responsabilidad del proveedor desarrollador o de un proveedor de contenido contratado por Itabey — debe explicitarse en presupuesto (E13) si se delega.
+
 ### 3.8 Notificaciones (FR-8xx)
 
 #### FR-801 — Sistema de notificaciones suaves
@@ -408,9 +503,11 @@ El valor central del producto **no reside en la captura de datos**, sino en su c
 - **Integraciones MVP:** Apple Health, Google Health Connect.
 - **Variables:** sueño, actividad, frecuencia cardiaca, temperatura, HRV.
 
-#### FR-1102 — Integración con calendarios externos
-- **Prioridad:** Should
-- **Integraciones:** Google Calendar, Apple Calendar.
+#### FR-1102 — Integración con calendarios externos (umbrella)
+- **Prioridad:** Should (MVP cubre solo importación FR-105) / Should (Fase 2 completa FR-106)
+- **Integraciones:** Google Calendar, Apple Calendar (vía sus APIs oficiales y, donde aplique, vía CalDAV).
+- **Operacionaliza:** FR-105 (importación) y FR-106 (sincronización bidireccional con visualización de fase del ciclo).
+- **Criterios transversales:** Activación voluntaria, configuración granular, desactivación inmediata, privacidad por defecto.
 
 #### FR-1103 — Arquitectura abierta para integraciones futuras
 - **Prioridad:** Must (preparación arquitectónica)
@@ -427,6 +524,87 @@ El valor central del producto **no reside en la captura de datos**, sino en su c
   - Catálogo de señales validado por equipo clínico antes de despliegue.
   - 0 falsos negativos críticos en testing controlado (señales graves no detectadas).
   - < 5% falsos positivos (tolerable: mejor pecar de prudente).
+
+### 3.13 Gestión de cuentas, modos de acceso y tiers (FR-13xx)
+
+> Funcionalidad transversal y compromiso arquitectónico. Operacionaliza el modelo del § 1.5: la cuenta de la usuaria es un objeto único persistente; el acceso comercial y la profundidad funcional son **dos ejes ortogonales** (modo de acceso × tier de profundidad), ambos modulables sin pérdida de datos.
+
+#### FR-1301 — Cuenta única persistente de la usuaria
+- **Prioridad:** Must (MVP)
+- **Descripción:** Cada usuaria posee una **única** cuenta vinculada a su identidad y a sus datos longitudinales. La cuenta sobrevive a cualquier cambio de modo de acceso (free → individual, individual → B2B, B2B → individual al terminar contrato organizacional) y a cualquier cambio de tier.
+- **Criterios de aceptación:**
+  - Sin duplicación de cuentas por cambio de modo o tier.
+  - 100% de los datos longitudinales conservados al cambiar modo o tier.
+  - La usuaria es **siempre titular** de los datos. La organización pagadora no es titular y no puede heredar la cuenta.
+
+#### FR-1302 — Modos de acceso comercial
+- **Prioridad:** Must (free + individual MVP) / Should (B2B en Fase 2)
+- **Modos:**
+  - **Free** — funcionalidades limitadas (sec. 2 fuente).
+  - **Individual de pago** — costeado directamente por la usuaria.
+  - **Patrocinado por organización (B2B)** — costeado por una empresa, aseguradora, mutua, sistema sanitario u otra entidad. Vinculación mediante código, invitación o SSO empresarial.
+- **Criterios de aceptación:**
+  - El modo activo es visible para la usuaria en cualquier momento.
+  - Cambio de modo no requiere re-onboarding ni nuevo consentimiento de los datos ya existentes.
+
+#### FR-1303 — Migración entre modos sin pérdida de datos
+- **Prioridad:** Must (free ↔ individual en MVP) / Should (incluyendo B2B en Fase 2)
+- **Casos cubiertos:**
+  - **Free → Individual:** desbloqueo de funcionalidades; datos previos accesibles inmediatamente.
+  - **Individual → B2B:** la organización asume el coste; la usuaria mantiene cuenta, datos y configuración.
+  - **B2B → Individual:** al finalizar el contrato organizacional, la usuaria recibe aviso anticipado y elige continuar como individual de pago o degradar a free conservando datos.
+  - **Cualquier modo → Free:** los datos no se borran salvo solicitud explícita; algunas funcionalidades quedan inaccesibles pero los datos siguen exportables.
+- **Criterios de aceptación:**
+  - Migración completada en < 5 minutos sin intervención técnica.
+  - 100% de datos conservados (registros, memoria de Asha, configuraciones, integraciones).
+  - Trazabilidad de la migración en logs de auditoría.
+
+#### FR-1304 — Privacidad en modo B2B
+- **Prioridad:** 🛡️ **INNEGOCIABLE — Must (cuando se entregue B2B)**
+- **Descripción:** Cuando una organización patrocina el acceso de una usuaria, la organización **no accede en ningún caso** a los datos personales o conversaciones individuales de esa usuaria.
+- **Criterios de aceptación:**
+  - La organización solo accede a métricas agregadas y anónimas (uso global, satisfacción agregada, tendencias de cohorte). Nunca individuales.
+  - Cualquier compartición adicional (p. ej. enviar un informe) requiere acción explícita y revocable de la usuaria.
+  - Auditable técnicamente: una organización malintencionada nunca puede correlacionar uso con identidad individual.
+  - Tamaño mínimo de cohorte para reportes agregados (≥ 10 usuarias activas, propuesta) para evitar reidentificación por inferencia.
+
+#### FR-1305 — Perfil profesional gestor de pacientes (Fase 3 — preparación arquitectónica)
+- **Prioridad:** Could (no se construye en MVP ni en Fase 2)
+- **Descripción:** Reservar la posibilidad de un perfil profesional (sanitario, trabajador social, *coach* de salud) que pueda gestionar varias usuarias/pacientes que le hayan otorgado consentimiento explícito.
+- **Criterios de aceptación arquitectónica (sí exigibles al proveedor MVP):**
+  - El sistema de roles y permisos (sec. 20 fuente, NFR-S04) admite incorporar este rol sin rediseño estructural.
+  - El modelo de consentimiento (FR-904) permite a la usuaria autorizar acceso de un profesional concreto a un subconjunto granular de sus datos durante un periodo configurable.
+  - El modelo de datos prevé relación N-a-M entre profesionales gestores y usuarias.
+- **Distinción de P5 (Dra. Elena):** P5 valida conocimiento clínico genérico para todo el sistema. P7 (este perfil futuro) gestiona pacientes individuales con consentimiento explícito.
+
+#### FR-1306 — Tiers de profundidad funcional (capacidad arquitectónica)
+- **Prioridad:** Must (capacidad arquitectónica MVP) / Should (tiers operativos Fase 2)
+- **Descripción:** El sistema soporta **distintos tiers de profundidad funcional** que pueden activarse o desactivarse por usuaria, cohorte o contrato sin cambios de código. El PRD **no prescribe** qué funcionalidades irán en qué tier — esa decisión se deferirá al equipo de producto basándose en señal real de uso. Lo que sí se exige es la **capacidad arquitectónica** desde el día 1.
+- **Ejes parametrizables por tier (no exhaustivo):**
+  - Profundidad de **memoria de largo plazo** de Asha (FR-204): horizonte temporal, número de patrones simultáneos, granularidad de patrones detectados.
+  - **Frecuencia y profundidad de insights** (FR-209): proactivos vs solo bajo demanda.
+  - **Personalización de Asha** (FR-601): número de tonos disponibles, niveles de lenguaje, módulos de enfoque (FR-603).
+  - **Acceso a paneles avanzados** (FR-302 autoconocimiento, FR-304 corporal): visibilidad y profundidad.
+  - **Integraciones disponibles** (FR-104, FR-1101–1103): qué wearables y calendarios se conectan.
+  - **Volumen de informes** (FR-401–403): número, frecuencia, formato.
+  - **Cuotas de uso de recursos**: llamadas a LLM, almacenamiento vectorial, tokens, procesamiento de voz.
+- **Criterios de aceptación:**
+  - Cualquier funcionalidad de § 3 puede ser activada/desactivada por tier mediante configuración (no por despliegue de código).
+  - Todo tier tiene **cuota de recursos** definida y observable; ningún tier es "ilimitado" sin cap.
+  - Cambio de tier es transparente para la usuaria (datos íntegros, configuraciones preservadas) y reversible.
+  - Al menos **3 tiers parametrizables** soportados desde el MVP (los nombres y contenidos concretos los define producto/comercial post-MVP).
+
+#### FR-1307 — Activación dinámica de funcionalidades (feature flags como capacidad)
+- **Prioridad:** Must (MVP)
+- **Descripción:** El sistema dispone de un **gestor de feature flags** de primer nivel arquitectónico que permite:
+  - Activar/desactivar funcionalidades por usuaria, cohorte, tier (FR-1306), modo de acceso (FR-1302) o porcentaje de despliegue.
+  - Probar funcionalidades en producción con un subconjunto de usuarias antes de habilitarlas globalmente (canary release, A/B testing).
+  - Hacer rollback rápido sin redeploy si una funcionalidad genera incidencia.
+- **Criterios de aceptación:**
+  - El cambio de un flag se propaga al cliente en < 60 segundos sin reinicio de la app.
+  - Existe **panel administrativo** (vinculado a FR-1001) para gestionar flags con auditoría completa de cambios.
+  - Los flags **no se usan** para evadir disclaimers, hard-stop, ni requisitos de privacidad/seguridad innegociables.
+  - El sistema funciona correctamente con cualquier combinación coherente de flags activos/inactivos.
 
 ---
 
@@ -500,6 +678,8 @@ El valor central del producto **no reside en la captura de datos**, sino en su c
 | NFR-SC03 | Capacidad de crecimiento sin rediseño estructural | Hasta 50.000 usuarias |
 | NFR-SC04 | Arquitectura modular con feature flags |
 | NFR-SC05 | Despliegue progresivo y rollback funcional |
+| NFR-SC06 | **Modularidad funcional como capacidad arquitectónica de primer nivel** — toda funcionalidad de § 3 activable/desactivable por configuración (FR-1306, FR-1307). No se admiten dependencias rígidas que impidan tiering. |
+| NFR-SC07 | **Cuotas de recursos por tier** (LLM, almacenamiento vectorial, tokens, voz) configurables y observables sin cambios de código |
 
 ### 4.7 Accessibility (NFR-A)
 
@@ -527,6 +707,21 @@ El valor central del producto **no reside en la captura de datos**, sino en su c
 | NFR-D01 | 🛡️ Despliegue en cloud europeo (proveedor concreto a proponer por desarrollador) |
 | NFR-D02 | Procesamiento de datos personales dentro de la UE |
 | NFR-D03 | Documentación de subprocesadores con justificación de transferencias internacionales si las hubiera |
+
+### 4.10 Soporte, mantenimiento y operación post-launch
+
+| ID | Requisito |
+|----|-----------|
+| NFR-M01 | Plan de mantenimiento evolutivo y correctivo documentado por el proveedor (ver E9) |
+| NFR-M02 | Tiempos de respuesta a incidentes definidos por severidad (a proponer por el proveedor; objetivo mínimo: crítico < 4 h, alto < 24 h, medio < 5 días laborables) |
+| NFR-M03 | Asistencia técnica disponible al menos en horario laboral europeo |
+| NFR-M04 | Coste mensual recurrente desglosado: infraestructura, modelos LLM, voz, almacenamiento vectorial, soporte humano (E14) |
+| NFR-M05 | Estimación de coste por escenario por cada 1.000 usuarias activas (bajo, medio, alto) — mantiene la exigencia de la sec. 18.5 fuente |
+| NFR-M06 | Plan de migración / salida documentado **anti vendor lock-in** (E16): cómo Itabey continuaría sin el proveedor en menos de N semanas |
+| NFR-M07 | Runbooks operativos para incidencias frecuentes entregados al cierre del proyecto |
+| NFR-M08 | Actualizaciones de seguridad críticas con SLA específico (objetivo: < 72 h tras detección) |
+| NFR-M09 | **Preparación HL7/FHIR documentada** (E15): mapeo del modelo de datos a estos estándares y plan de evolución sin rediseño estructural — exigido en propuesta inicial aunque la implementación sea Fase 3 |
+| NFR-M10 | Compromiso de actualización del runbook de tiers (FR-1306) y feature flags (FR-1307) cada vez que cambia la matriz de funcionalidades |
 
 ---
 
@@ -730,6 +925,10 @@ El valor central del producto **no reside en la captura de datos**, sino en su c
 | R8 | Vendor lock-in técnico ante cambio de proveedor desarrollador | M | Alto | Cláusulas de propiedad intelectual completa, documentación contractual, código fuente y arquitectura entregables |
 | R9 | Rechazo del modelo de pago por la usuaria base | M | Medio | A/B testing de tiers, freemium generoso, estudio de willingness-to-pay |
 | R10 | Cumplimiento RGPD insuficiente detectado en auditoría | B | Crítico | DPIA temprana, asesoría legal especializada en healthtech UE, auditoría externa antes de lanzamiento |
+| R11 | Proveedor entrega arquitectura monolítica que dificulta tiering posterior | M | Alto | Modularidad y feature flags como criterio de evaluación de propuestas (FR-1306–1307, NFR-SC06–07, § 12.4); rechazo de propuestas que no demuestren capacidad |
+| R12 | B2B negocia precios bajos por volumen mientras costes de infraestructura/IA crecen | M | Alto | Cuotas de recursos por tier desde MVP (NFR-SC07), modelos de pricing B2B basados en consumo además de cabeza, tier B2B con profundidad limitada por defecto |
+| R13 | *Power users* B2C consumen recursos desproporcionados en tier estándar | M | Medio | Cuotas claras por tier (FR-1306), upgrade path a tier premium con coste alineado al valor entregado |
+| R14 | Tier strategy se define tarde y rehace producto | B | Alto | Capacidad arquitectónica desde MVP (FR-1306–1307); decisión comercial sobre contenidos de tier puede tomarse en cualquier momento sin rediseño |
 
 Probabilidad: A/M/B (Alta/Media/Baja). Impacto: Crítico/Alto/Medio/Bajo.
 
@@ -810,9 +1009,11 @@ Probabilidad: A/M/B (Alta/Media/Baja). Impacto: Crítico/Alto/Medio/Bajo.
 | Q3 | ¿El equipo clínico multidisciplinar ya está identificado/contratado, o forma parte del *scope* del proveedor ayudar a reclutarlo? | Cambia presupuesto y cronograma sustancialmente |
 | Q4 | ¿El podcast (sec. 10 fuente) ya existe con contenido producido, o se crea junto al producto? | Si no existe, FR-503 sale del MVP |
 | Q5 | ¿Vertical deportiva (sec. 23 fuente): horizonte 18 meses o 36+ meses? | Determina cuánta superficie reservar en arquitectura |
-| Q6 | ¿El activo defendible que se vende a inversores es la **app**, o la **base de conocimiento clínica versionada + el motor RAG sobre ella**? | Si es lo segundo, énfasis del PRD y de la inversión inicial cambian (más equipo clínico, más curaduría, menos UX virtuosa al inicio) |
+| Q6 | El feedback de Mariela del 2026-05-08 da **signal**: el activo defendible es la **combinación de core común (UX + base de conocimiento + motor RAG) y la capacidad de tiering modular** que diferencia profundidad por usuaria. ¿Confirma esta lectura? | La respuesta valida el énfasis arquitectónico de § 1.5, NFR-SC06–07 y los criterios de evaluación § 12.4 |
 | Q7 | ¿Hay techo de coste para el MVP o es propuesta abierta del proveedor? | Define alcance realista del MVP |
 | Q8 | ¿Política de uso de modelos LLM: privados, open-source self-hosted, mixto? | Implicaciones críticas en privacidad y coste |
+| Q9 | ¿Cuándo se definirán los **contenidos concretos de cada tier** (qué funcionalidades en core/estándar/premium, cuáles para B2B vs B2C individual)? Sugerencia: tras 3 meses de uso real con cohorte de validación. | Permite a producto/comercial planificar la decisión sin bloquear desarrollo |
+| Q10 | ¿Qué cohorte mínima B2B se acepta para garantizar privacidad agregada (FR-1304)? Propuesta MVP: ≥ 10 usuarias activas para reportes agregados. | Por debajo de cierto tamaño existe riesgo de reidentificación por inferencia |
 
 ---
 
@@ -843,10 +1044,15 @@ Probabilidad: A/M/B (Alta/Media/Baja). Impacto: Crítico/Alto/Medio/Bajo.
 | E6 | Estimación de costes de infraestructura por escenario (1.000 usuarias activas: bajo, medio, alto — sec. 18.5 fuente) |
 | E7 | Equipo asignado con roles y experiencia |
 | E8 | Stack tecnológico propuesto con justificación y portabilidad |
-| E9 | Plan de mantenimiento post-lanzamiento |
+| E9 | Plan de mantenimiento post-lanzamiento (evolutivo + correctivo) con SLAs por severidad y horario de soporte |
 | E10 | Medidas de seguridad y plan de pruebas |
 | E11 | Riesgos técnicos identificados con mitigaciones |
 | E12 | Plan de entrega documentada para evitar dependencia estructural del proveedor |
+| E13 | Plan de producción / integración del **vídeo explicativo** (FR-702): producción interna del proveedor, externalización a partner de contenido, o solo reproductor + integración (Itabey aporta vídeo) |
+| E14 | **Coste mensual recurrente** desglosado por componente (infraestructura, modelos LLM, voz, vectorial, soporte humano) y escenarios bajo/medio/alto por cada 1.000 usuarias activas |
+| E15 | **Documento de preparación arquitectónica para HL7/FHIR**: cómo el modelo de datos puede mapearse a estos estándares en una fase posterior sin rediseño estructural |
+| E16 | **Plan de migración / salida** (anti vendor lock-in): cómo Itabey continuaría operando sin el proveedor, con estimación de tiempo y coste |
+| E17 | **Demostración de capacidad de arquitectura modular y tiering** (FR-1306, FR-1307): referencia de proyecto previo o prueba técnica que evidencie capacidad de feature flags como capacidad arquitectónica de primer nivel, no como añadido |
 
 ### 12.3 Entregables al cierre del proyecto
 
@@ -861,13 +1067,19 @@ Probabilidad: A/M/B (Alta/Media/Baja). Impacto: Crítico/Alto/Medio/Bajo.
 
 | Criterio | Peso propuesto |
 |----------|---------------|
-| Experiencia HealthTech + RGPD | 20% |
-| Arquitectura técnica (modular, desacoplada, sin lock-in) | 20% |
+| Experiencia HealthTech + RGPD | 18% |
+| **Arquitectura técnica modular con capacidad de tiering** (FR-1306–1307, NFR-SC06–07) — desacoplada, feature flags como capacidad de primer nivel, sin lock-in | **20%** |
 | Experiencia con IA conversacional + RAG | 15% |
-| Equipo asignado y experiencia | 15% |
-| Coste total de propiedad (desarrollo + infraestructura + costes IA estimados) | 15% |
-| Plan de entrega y documentación (anti vendor lock-in) | 10% |
-| Capacidad de mantenimiento evolutivo | 5% |
+| Equipo asignado y experiencia | 12% |
+| Coste total de propiedad (desarrollo + infraestructura + costes IA estimados, incluyendo cuotas por tier) | 15% |
+| Plan de mantenimiento post-launch (SLAs, soporte, costes recurrentes — § 4.10) | 10% |
+| Plan de entrega y documentación (anti vendor lock-in, plan de salida E16) | 5% |
+| Preparación HL7/FHIR documentada (E15) | 5% |
+
+> **Notas de evaluación:**
+> - Una propuesta puede cumplir todos los FRs individuales y aun así **no cumplir el PRD** si entrega arquitectura monolítica. El criterio de modularidad/tiering es **discriminante**, no acumulativo.
+> - El criterio "Experiencia HealthTech + RGPD" se evalúa por referencias verificables, no por declaraciones.
+> - Una propuesta sin demostración convincente de E17 (capacidad modular) se rechaza para la fase final, independientemente del coste.
 
 ---
 
