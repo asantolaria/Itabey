@@ -105,6 +105,32 @@ Esta decisión es **muy estructurante** del producto y del coste mensual.
 
 **Propuesta del consultor:** Para una primera fase, **opción C mixta** suele dar el mejor balance: modelos pequeños abiertos para clasificación de intención, RAG y extracción de entidades (barato y privado); modelo grande comercial solo para conversación profunda y generación de informes (mejor calidad, coste controlado por volumen). Pero la decisión final depende de tu apetito de inversión inicial vs coste recurrente y de cuánto control quieras sobre los datos.
 
+**Consideración adicional (importante):** El coste de inferencia de modelos de IA va a seguir aumentando en los próximos años. Es razonable planificar escenarios donde el coste por consulta sea **5 a 10 veces más caro** de lo que pagaríamos hoy en horizonte 2–4 años, especialmente para modelos de frontera. Esto refuerza la importancia de la opción mixta y de tener arquitectura preparada para cambiar de proveedor LLM sin rediseño. Ver Q15 más abajo para la pregunta financiera concreta.
+
+---
+
+### Q15 — Tolerancia financiera al escenario de inflación del coste de IA
+
+**Pregunta:** Los precios de inferencia de IA tienen una probabilidad alta de aumentar significativamente en horizonte 2–4 años. ¿Cuánto está dispuesta la empresa a absorber? Tres niveles posibles:
+
+- **Conservador (1×–2× inflación):** Operación normal. No requiere medidas extra.
+- **Realista (3×–5× inflación):** El plan financiero del seed reserva colchón explícito para esto. El producto pasa a un mix híbrido obligatorio (open-source self-hosted donde sea posible) desde el día uno.
+- **Pesimista (5×–10× inflación):** Además de lo anterior, se negocian contratos de capacidad reservada con proveedores LLM clave para fijar precios; se contemplan modelos open-source self-hosted incluso para conversación profunda; el pricing del producto se ajusta para absorber esa inflación.
+
+**Por qué importa:** Esta decisión condiciona:
+
+- **El plan financiero del seed.** Si solo se reserva presupuesto para el escenario central, una inflación 5× del coste IA puede agotar la caja antes del Año 2.
+- **La arquitectura técnica.** La diferencia entre opción A (modelos privados puros) y opción mixta no es solo de coste actual, sino de **resistencia a inflación futura**. Una opción privada pura amplifica el impacto de subidas de precio del proveedor; una opción mixta lo mitiga.
+- **El pricing del producto.** Si el coste por usuaria se multiplica por 5 pero el precio que paga la usuaria solo sube un 20%, el margen desaparece. El pricing tiene que estar diseñado desde el inicio con cuotas por tier y modelo de consumo (no solo per-seat) para poder ajustarse.
+- **La selección del proveedor desarrollador.** Las propuestas que cotizan infraestructura asumiendo precios estables de IA son más vulnerables que las que cotizan con sensibilidad a inflación. Esto se puede evaluar exigiendo en la propuesta un análisis de escenarios.
+
+**Propuesta del consultor:** Planificar **al menos el escenario realista (3×–5×)** desde el inicio. Esto significa:
+
+1. Reservar entre 10% y 20% del presupuesto del seed como colchón para inflación de coste IA (además del colchón general).
+2. Exigir al proveedor desarrollador propuesta de arquitectura **multi-modelo con capacidad de switch** sin rediseño.
+3. Pricing del producto con cuotas claras por tier desde MVP (ya cubierto en el PRD vía FR-1306, NFR-SC07).
+4. Hacer una revisión semestral del coste por usuaria activa una vez en producción, con activación automática de medidas de contención si supera umbral predefinido.
+
 ---
 
 ## 🟡 Importantes — conviene cerrarlas, no bloquean
@@ -231,7 +257,7 @@ Si te resulta más cómodo, puedes responder directamente sobre este documento m
 
 **Mi recomendación:**
 
-1. Las 5 críticas (Q1, Q2, Q3, Q7, Q8) las cerramos primero — son las que el proveedor necesita para cotizar y el inversor para evaluar.
+1. Las 6 críticas (Q1, Q2, Q3, Q7, Q8, Q15) las cerramos primero — son las que el proveedor necesita para cotizar y el inversor para evaluar.
 2. Las 5 importantes (Q4–Q6, Q10–Q11) las cerramos en una segunda ronda corta.
 3. Las 4 operativas (Q9, Q12–Q14) las dejamos en *backlog* hasta que el desarrollo esté en marcha.
 
