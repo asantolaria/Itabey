@@ -2,17 +2,10 @@
 
 **Revision:** 3
 **Revision date:** 2026-05-29
-**Author:** Alex Santolaria — Senior External Technical Consultant
-**Status:** Draft — for vendor evaluation
 **Owning entity:** Polymita Systems SL
-**Source documents:**
-- Documento de Requerimientos Funcionales — Itabey / Asha (CEO, v1.0)
-- Marco general del proyecto / General project framework (CEO)
-- Pitch Deck (investor presentation)
-- Doc Pool (project manifesto)
+**Status:** Reference document for development proposal evaluation
 
-
-> This PRD reformulates the CEO's source documents into a PRD structure to serve as the basis for evaluating development vendor proposals. Values marked 🏷️ **PROPOSAL** are technical inferences pending CEO validation. Decisions marked 🛡️ **NON-NEGOTIABLE** derive directly from the source documents and cannot be negotiated without CEO authorisation.
+> This document defines the functional scope, technical requirements, constraints and evaluation criteria for the development of the Itabey/Asha product. It serves as the basis for development vendors to prepare their proposal. Decisions marked 🛡️ **NON-NEGOTIABLE** are non-negotiable project requirements and must be respected in full in any proposal.
 
 ---
 
@@ -24,7 +17,7 @@ This PRD is governed by **three cross-cutting axes** marked on every FR/NFR:
 |------|--------|---------|
 | **Delivery phase** | Phase 1 (MVP) · Phase 2 (Evolution) | **When** the functionality is delivered. Phase 1 is the initial commercial launch; Phase 2 is the subsequent evolution with verticals and expansions. |
 | **MoSCoW priority** | Must · Should · Could | **Importance within its phase**. Must = non-negotiable delivery in that phase; Should = expected delivery with some margin; Could = delivered only if scope allows. |
-| **Origin restriction** | 🛡️ NON-NEGOTIABLE · 🏷️ PROPOSAL · (no mark) | Decisions marked non-negotiable come directly from source documents. Those marked as proposals are technical inferences pending validation. Others are standard practice criteria. |
+| **Origin restriction** | 🛡️ NON-NEGOTIABLE · (no mark) | Decisions marked non-negotiable are non-negotiable project requirements. Others are standard practice criteria. |
 
 **Reading rule for vendors:** the combination *Phase 1 + Must* defines the minimum scope of the MVP. A proposal that fails to deliver all *Phase 1 Must* items does not meet this PRD.
 
@@ -69,7 +62,7 @@ The product's core value **does not lie in data capture** but in its capacity fo
 
 ### 1.4 Product phase structure
 
-> The product is split into **two phases**. Phase 1 (MVP) is the initial commercial launch. Phase 2 (Evolution) groups all subsequent expansions. This organisation reflects the General Framework § 6 clarification and the CEO–consultant conversation of 2026-05-27: the MVP launches commercially for B2C **and** initial B2B clients, but as a "solid, coherent and scalable core", not as a giant system.
+> The product is split into **two phases**. Phase 1 (MVP) is the initial commercial launch. Phase 2 (Evolution) groups all subsequent expansions. The MVP launches commercially for B2C **and** initial B2B clients, but as a "solid, coherent and scalable core", not as a giant system.
 
 #### 1.4.0 MVP focus
 
@@ -81,7 +74,7 @@ The product's core value **does not lie in data capture** but in its capacity fo
 > - **Internal calendar** — canonical view of the user's cyclical information (FR-303)
 > - **UX** — intuitive, fluid, accessible user experience, with thoughtful onboarding (FR-701, FR-702) and cross-cutting modes (neurodivergent mode, crisis mode — NFR-A)
 >
-> **Functionality explicitly out of MVP** (CEO decision confirmed 2026-05-27) — **but architecturally prepared from day 1 for incorporation in Phase 2 without structural redesign**:
+> **Functionality explicitly out of MVP** — **but architecturally prepared from day 1 for incorporation in Phase 2 without structural redesign**:
 >
 > | Functionality | FR | Why out of MVP |
 > |---|---|---|
@@ -151,7 +144,7 @@ The PRD **does not prescribe** which features will go in which tier — that dec
 
 - Which exact features go in which tier (post-MVP decision, based on real usage signal).
 - Commercial tier names (marketing decision).
-- Tier pricing (commercial decision by the CEO).
+- Tier pricing.
 - Which tier B2B client employees receive (per-contract decision).
 
 > **Proposal evaluation rule:** A vendor proposal that delivers monolithic architecture with fixed-role permissions **does not meet** this PRD, even if it complies with every individual FR. Modular tiering capability is evaluated explicitly — see § 11.4.
@@ -506,7 +499,7 @@ Ownership of **all** code, architecture, documentation, flows, functional design
   - Capsules feed Asha's RAG base.
 
 #### FR-503 — Podcast recommendations
-- **Phase:** 2 (Evolution) — **Priority:** Could (depends on prior podcast existence — open CEO question)
+- **Phase:** 2 (Evolution) — **Priority:** Could
 - **Description:** Recommendation of project podcast episodes and fragments; automatic transcription; indexing.
 
 ### 3.6 Personalisation (FR-6xx)
@@ -636,7 +629,7 @@ Ownership of **all** code, architecture, documentation, flows, functional design
 
 #### 3.11.3 External apps and deep links
 
-> **Requirement origin:** CEO email (2026-05-29). The system must be able to recommend external apps (sleep, meditation, nutrition, training, fertility, neurodivergence, etc.) when they add value to the user, with explicit consent and a fluid experience. **The architecture must be prepared from MVP**; operational activation is Phase 2.
+> The system must be able to recommend external apps (sleep, meditation, nutrition, training, fertility, neurodivergence, etc.) when they add value to the user, with explicit consent and a fluid experience. **The architecture must be prepared from MVP**; operational activation is Phase 2.
 
 ##### FR-1110 — Architecture prepared for deep links and external integrations
 - **Phase:** 1 (MVP, architecture prepared) — **Priority:** Must
@@ -733,7 +726,7 @@ Ownership of **all** code, architecture, documentation, flows, functional design
   - The organisation only accesses aggregated, anonymous metrics (overall usage, aggregate satisfaction, cohort trends). Never individual.
   - Any additional sharing (e.g. sending a report) requires explicit, revocable user action.
   - Technically auditable: a malicious organisation can never correlate usage with individual identity.
-  - Minimum cohort size for aggregate reports: ≥ 10 active users (proposal, validable by CEO).
+  - Minimum cohort size for aggregate reports: ≥ 10 active users (project proposal).
 
 #### FR-1305 — Professional patient-management profile
 - **Phase:** 2 (Evolution, not built in MVP) — **Priority:** Could
@@ -1055,7 +1048,7 @@ Ownership of **all** code, architecture, documentation, flows, functional design
 
 ## 7. Success metrics
 
-> 🏷️ **PROPOSAL — all target values require CEO validation.** Ranges aligned with public benchmarks for longitudinal B2C healthtech and cycle apps (Flo, Clue, Natural Cycles) adjusted to Itabey's expected usage profile and Spanish-speaking audience.
+> Target ranges are aligned with public benchmarks for longitudinal B2C healthtech and cycle apps (Flo, Clue, Natural Cycles) adjusted to Itabey's expected usage profile and Spanish-speaking audience. They will be refined with real data once the product is in market.
 
 ### 7.1 Activation
 
@@ -1272,7 +1265,7 @@ Probability: H/M/L. Impact: Critical/High/Medium/Low.
 
 ### 11.4 Weighted evaluation criteria (proposal)
 
-> 🏷️ **PROPOSAL — weights to validate by the CEO based on strategic priorities.**
+> Indicative weights. The organisation may adjust them based on its strategic priorities before initiating the evaluation.
 
 | Criterion | Proposed weight |
 |-----------|-----------------|

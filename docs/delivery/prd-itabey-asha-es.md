@@ -2,16 +2,10 @@
 
 **Revisión:** 3
 **Fecha de revisión:** 2026-05-29
-**Autor:** Alex Santolaria — Consultor Técnico Senior Externo
-**Estado:** Draft — para evaluación de proveedores
 **Sociedad titular:** Polymita Systems SL
-**Documentos fuente:**
-- Documento de Requerimientos Funcionales — Itabey / Asha (CEO, v1.0)
-- Marco general del proyecto (CEO)
-- Pitch Deck (a inversores)
-- Doc Pool (manifiesto del proyecto)
+**Estado:** Documento de referencia para evaluación de propuestas de desarrollo
 
-> Este PRD reformula los documentos fuente de la CEO en estructura PRD para servir como base de evaluación de propuestas de proveedores de desarrollo. Los valores marcados con 🏷️ **PROPUESTA** son inferencias técnicas pendientes de validación por la CEO. Las decisiones marcadas con 🛡️ **INNEGOCIABLE** derivan directamente de los documentos fuente y no son negociables sin autorización de la CEO.
+> Este documento define el alcance funcional, los requisitos técnicos, las restricciones y los criterios de evaluación para el desarrollo del producto Itabey/Asha. Sirve como base para que los proveedores de desarrollo elaboren su propuesta. Las decisiones marcadas con 🛡️ **INNEGOCIABLE** son requisitos no negociables del proyecto y deben respetarse íntegramente en cualquier propuesta.
 
 ---
 
@@ -23,7 +17,7 @@ Este PRD se rige por **tres ejes transversales** que aparecen marcados en cada F
 |-----|---------|----------------|
 | **Fase de entrega** | Fase 1 (MVP) · Fase 2 (Evolución) | **Cuándo** se entrega la funcionalidad. La Fase 1 es el lanzamiento comercial inicial; la Fase 2 es la evolución posterior con verticales y expansiones. |
 | **Prioridad MoSCoW** | Must · Should · Could | **Importancia dentro de su fase**. Must = entrega no negociable de esa fase; Should = entrega esperada con margen; Could = entrega solo si el alcance lo permite. |
-| **Restricción de origen** | 🛡️ INNEGOCIABLE · 🏷️ PROPUESTA · (sin marca) | Decisiones marcadas como innegociables vienen directamente de los documentos fuente. Las marcadas como propuesta son inferencias técnicas pendientes de validación. El resto son criterios estándar de la práctica. |
+| **Restricción de origen** | 🛡️ INNEGOCIABLE · (sin marca) | Las decisiones marcadas como innegociables son requisitos no negociables del proyecto. El resto son criterios estándar de la práctica. |
 
 **Regla de lectura para proveedores:** la combinación *Fase 1 + Must* define el alcance mínimo del MVP. Una propuesta que no entregue todos los *Must de Fase 1* no cumple este PRD.
 
@@ -80,7 +74,7 @@ El valor central del producto **no reside en la captura de datos**, sino en su c
 > - **Calendario interno** — vista canónica de la información cíclica de la usuaria (FR-303)
 > - **UX** — experiencia de uso intuitiva, fluida y accesible, con onboarding cuidado (FR-701, FR-702) y modos transversales (modo neurodivergente, modo crisis — NFR-A)
 >
-> **Funcionalidades explícitamente fuera del MVP** (decisión CEO confirmada 2026-05-27) — **pero arquitectura preparada desde el inicio para incorporarlas en Fase 2 sin rediseño estructural**:
+> **Funcionalidades explícitamente fuera del MVP** — **pero arquitectura preparada desde el inicio para incorporarlas en Fase 2 sin rediseño estructural**:
 >
 > | Funcionalidad | FR | Por qué fuera del MVP |
 > |---|---|---|
@@ -150,7 +144,7 @@ El PRD **no prescribe** qué funcionalidades irán en qué tier — esa decisió
 
 - Qué funcionalidades exactas van en qué tier (decisión post-MVP, basada en señal de uso real).
 - Nombres comerciales de los tiers (decisión de marketing).
-- Precios por tier (decisión comercial de la CEO).
+- Precios por tier.
 - Qué tier reciben las empleadas de un cliente B2B concreto (decisión por contrato).
 
 > **Regla de evaluación de propuestas:** Una propuesta de proveedor que entregue arquitectura monolítica con permisos por rol fijo **no cumple** este PRD, aunque cumpla todos los FRs individualmente. La capacidad de tiering modular se evalúa explícitamente — ver § 11.4.
@@ -505,7 +499,7 @@ La titularidad de **todo** el código, arquitectura, documentación, flujos, dis
   - Las cápsulas alimentan la base RAG de Asha.
 
 #### FR-503 — Recomendaciones de podcast
-- **Fase:** 2 (Evolución) — **Prioridad:** Could (depende de existencia previa del podcast del proyecto — pregunta abierta CEO)
+- **Fase:** 2 (Evolución) — **Prioridad:** Could
 - **Descripción:** Recomendación de episodios y fragmentos concretos del podcast del proyecto; transcripción automática; indexación.
 
 ### 3.6 Personalización (FR-6xx)
@@ -635,7 +629,7 @@ La titularidad de **todo** el código, arquitectura, documentación, flujos, dis
 
 #### 3.11.3 Apps externas y deep links
 
-> **Origen del requisito:** Email de la CEO (2026-05-29). El sistema debe poder recomendar apps externas (sueño, meditación, nutrición, entrenamiento, fertilidad, neurodivergencia, etc.) cuando aporten valor a la usuaria, con consentimiento explícito y experiencia fluida. **La arquitectura debe estar preparada desde el MVP**; la activación operativa de la funcionalidad es Fase 2.
+> El sistema debe poder recomendar apps externas (sueño, meditación, nutrición, entrenamiento, fertilidad, neurodivergencia, etc.) cuando aporten valor a la usuaria, con consentimiento explícito y experiencia fluida. **La arquitectura debe estar preparada desde el MVP**; la activación operativa de la funcionalidad es Fase 2.
 
 ##### FR-1110 — Arquitectura preparada para deep links e integraciones externas
 - **Fase:** 1 (MVP, arquitectura preparada) — **Prioridad:** Must
@@ -732,7 +726,7 @@ La titularidad de **todo** el código, arquitectura, documentación, flujos, dis
   - La organización solo accede a métricas agregadas y anónimas (uso global, satisfacción agregada, tendencias de cohorte). Nunca individuales.
   - Cualquier compartición adicional (p. ej. enviar un informe) requiere acción explícita y revocable de la usuaria.
   - Auditable técnicamente: una organización malintencionada nunca puede correlacionar uso con identidad individual.
-  - Tamaño mínimo de cohorte para reportes agregados: ≥ 10 usuarias activas (propuesta, validable por CEO).
+  - Tamaño mínimo de cohorte para reportes agregados: ≥ 10 usuarias activas (propuesta del proyecto).
 
 #### FR-1305 — Perfil profesional gestor de pacientes
 - **Fase:** 2 (Evolución, no se construye en MVP) — **Prioridad:** Could
@@ -1054,7 +1048,7 @@ La titularidad de **todo** el código, arquitectura, documentación, flujos, dis
 
 ## 7. Métricas de éxito
 
-> 🏷️ **PROPUESTA — todos los valores objetivo requieren validación de la CEO.** Los rangos están alineados con benchmarks públicos de healthtech B2C longitudinal y aplicaciones de ciclo (Flo, Clue, Natural Cycles) ajustados al perfil de uso de Itabey y la audiencia hispanohablante.
+> Los rangos objetivo están alineados con benchmarks públicos de healthtech B2C longitudinal y aplicaciones de ciclo (Flo, Clue, Natural Cycles) ajustados al perfil de uso de Itabey y la audiencia hispanohablante. Se ajustarán con datos reales una vez el producto esté en mercado.
 
 ### 7.1 Activación
 
@@ -1271,7 +1265,7 @@ Probabilidad: A/M/B (Alta/Media/Baja). Impacto: Crítico/Alto/Medio/Bajo.
 
 ### 11.4 Criterios de evaluación ponderados (propuesta)
 
-> 🏷️ **PROPUESTA — pesos a validar por la CEO en función de prioridades estratégicas.**
+> Pesos orientativos. La organización puede ajustarlos en función de sus prioridades estratégicas antes de iniciar la evaluación.
 
 | Criterio | Peso propuesto |
 |----------|----------------|
