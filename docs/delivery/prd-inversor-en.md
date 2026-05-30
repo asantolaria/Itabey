@@ -79,7 +79,173 @@ The MVP concentrates the **five core pillars** validating the product's value pr
 
 **Functionality explicitly out of MVP** (with architecture prepared to add in Phase 2 without redesign): forum/community, shared panel, 3D body map.
 
-### 3.3 Differentiation: Asha as a defensible asset
+### 3.3 MVP functionality by area
+
+The following describes the concrete functionality the MVP will deliver, organised by area. This list summarises the functional scope of the technical PRD in non-technical language:
+
+**Data capture and recording:**
+
+- Manual recording of cycle, symptoms, emotions, habits, sleep and life events.
+- Structured voice recording in natural language ("got my period today", "my lower back hurts", "slept badly").
+- Automatic import of biometric data from Apple Health and Google Health Connect (sleep, activity, heart rate, temperature, HRV).
+- Import of relevant events from Google Calendar and Apple Calendar (medical appointments, life events, travel).
+- *Offline-first* operation: any recording persists without connection and syncs when restored.
+
+**Conversation with Asha:**
+
+- Text and voice conversation, with configurable voice, accent, speed and tone.
+- Responses backed by a clinically validated knowledge base (RAG architecture): if confidence is low, Asha responds "I have no validated information on this" instead of inventing.
+- Selective long-term memory (patterns, useful conclusions), not the complete conversation. The user can inspect, edit and delete what is remembered about her.
+- Generation of non-diagnostic hypotheses, pattern detection, observation suggestions and recommendation of professional consultation when appropriate.
+- **Visible and persistent disclaimers** ("Asha does not diagnose", "Asha does not replace a healthcare professional", "Asha may make mistakes").
+- **Hard-stop protocol** for severe signals: when severe emotional risk, self-harm or medical emergency is detected, Asha suspends generative response and activates predefined clinically validated messages with redirection to emergency resources.
+- Quick feedback per response (useful / not useful / problematic / simpler / deeper) feeding internal quality metrics.
+
+**User panels and information:**
+
+- Main panel with current state, contextual summary, cycle phase and quick access.
+- Internal calendar with hormonal cycle, menstruation, estimated ovulation and fertility, lunar phase, manual events and soft predictions.
+- Self-knowledge panel in initial version: basic detected patterns, longitudinal evolution, time-series charts.
+- PDF report generation with longitudinal evolution of symptoms, cycle, mood, patterns and recommendations.
+
+**Personalisation and onboarding:**
+
+- Progressive conversational onboarding (without overwhelming the user with decisions from minute one).
+- Asha tone selection (direct, empathetic, technical, realistic, soft, structured), language level (simple, technical, advanced) and voice/accent.
+- Short explanatory video integrated in the product, accessible from onboarding and from a permanent help menu. Subtitles and offline playback if cached.
+- Cross-cutting modes: crisis mode (for difficult days, simplified interface), activatable neurodivergent mode (stimulus reduction, low cognitive load).
+
+**Notifications:**
+
+- Soft notifications system, configurable by the user: recording reminders, cycle alerts, incomplete-record alerts. Non-invasive by default.
+
+**Privacy and data control:**
+
+- The user sees at any moment which data is stored about her.
+- Full export of her data in structured format.
+- Total deletion with explicit confirmation (right to be forgotten).
+- Granular and revocable consent for each use of data (Asha memory, integrations, aggregated use for research).
+- Pause tracking without data loss.
+
+**Internal dashboards:**
+
+- Administration dashboard (Founder / Super Admin) with global system metrics and management tools.
+- Clinical dashboard restricted to the clinical team for validation of content and biomedical knowledge (without access to individual data or conversations).
+- Corporate dashboard for B2B clients with anonymous aggregate metrics, population wellbeing metrics, ROI indicators and prevention tools.
+
+**External integrations:**
+
+- Apple Health (iOS) and Google Health Connect (Android) — initial health integrations.
+- Event import from Google Calendar and Apple Calendar.
+- Architecture prepared for future integrations with advanced wearables, complementary external apps (sleep, meditation, nutrition), HL7/FHIR and third-party APIs.
+
+**Account and tier management:**
+
+- Single persistent account per user, independent of access mode (free, paid individual, sponsored by organisation).
+- Migration between modes without data loss (free ↔ individual ↔ sponsored).
+- Corporate linkage via company code in MVP (full enterprise SSO in Phase 2).
+- Non-negotiable B2B privacy: the organisation never accesses personal data or conversations.
+- Modular tiering capability: the system can activate or deactivate features per user, cohort or contract without code changes (at least 3 parameterisable tiers from MVP).
+
+### 3.4 Key product flows
+
+Five flows described in the PRD to understand how the system is used in practice:
+
+**Onboarding (Day 1):**
+
+The user downloads the app, sees a clear privacy screen with granular consents, selects the focus that interests her most (scientific, integrative, emotional, wellbeing, spiritual, complementary), chooses Asha's tone and language level, receives a conversational mini-tutorial, makes her first assisted recording and receives Asha's first contextual response with disclaimer. **Success criterion**: ≥ 70% of users complete onboarding in one session.
+
+**Daily recording (everyday use):**
+
+The user opens the app or responds to a soft notification, records her day by voice or text ("got my period today", "slept very badly"), Asha extracts intent and entity, the user confirms or corrects, the data is recorded and reflected in panel and calendar. **Success criterion**: complete recording in under 30 seconds in 95% of cases.
+
+**Longitudinal pattern consultation:**
+
+The user opens the self-knowledge panel, sees a pattern detected by Asha ("your energy drops recurrently 2 days before your cycle"), Asha contextualises with the validated knowledge base, recommends a related educational capsule or records an observation. Optionally the user adds a personal goal or shares the pattern.
+
+**Generating a report for a healthcare professional (Phase 2):**
+
+The user asks Asha "prepare a report for my doctor", chooses time range and focus, Asha generates a structured clinical summary with symptoms, correlations, evolution and relevant entries, the user reviews and approves, the system generates a PDF with mandatory disclaimer.
+
+**Crisis protocol (hard-stop, non-negotiable cross-cutting):**
+
+The user expresses a severe signal (self-harm, intense emotional crisis, medical emergency), the system detects it automatically and suspends Asha's generative response, offers a clinically validated predefined message, shows local emergency resources (country-specific crisis lines) and optionally offers to contact a preconfigured trusted person. **Non-negotiable criterion**: 100% of severe signals activate hard-stop, 0 incidents of free generative response to severe signals.
+
+### 3.5 Product commitments
+
+Quality, security, privacy and operations guarantees the product must meet. For each commitment we state "what we guarantee", not "how we measure it" (that's in the technical PRD):
+
+**Performance and experience:**
+
+- Asha responds by text in under 5 seconds for standard queries (10 seconds for queries requiring deep search in the knowledge base).
+- Asha responds by voice in under 3 seconds for short responses.
+- The app opens and shows content in under 3 seconds on a 4G network.
+- Any manual recording persists and is visually confirmed in under 2 seconds.
+
+**Reliability and availability:**
+
+- Monthly availability of 99.5% or higher once in production.
+- Offline-first operation: 100% of core recording features available without connection.
+- If Asha or an external integration fails, the application remains operational with a clear message and local recordings preserved.
+- Daily encrypted backups in a separate European repository.
+
+**Security:**
+
+- Data encryption in transit (TLS 1.3) and at rest (AES-256).
+- Robust authentication for users and mandatory two-factor authentication for internal roles.
+- Granular role-based access control (RBAC) — the clinical team member does not see business metrics, the moderation member does not see clinical data, etc.
+- Activity logs, internal access audit and traceability of critical changes.
+- Regular security testing (DAST/SAST, pen-test before each major release).
+- Deployment prepared for external security audits.
+
+**Privacy (non-negotiable):**
+
+- Full GDPR compliance with Art. 9 treatment for health data.
+- Explicit, granular and revocable consent by the user for each use of her data.
+- Minimisation: only what is necessary for the active feature is requested.
+- Anonymisation and architectural separation between individual and aggregate data.
+- Right to be forgotten implemented at pipeline level (not just logical deletion).
+- **No sale of personal data under any circumstances.**
+- DPIA (Data Protection Impact Assessment) carried out before launch.
+- *Data philanthropy* model: aggregated anonymised data may contribute to research with explicit consent, **never as a commercial product**.
+
+**Compatibility and accessibility:**
+
+- iOS 16+ and Android 12+ in MVP.
+- Responsive web (Chrome, Safari, Firefox, Edge).
+- Compatibility with screen readers (VoiceOver, TalkBack, NVDA).
+- WCAG 2.1 AA level minimum.
+- Voice-only mode for non-sighted users.
+- Activatable neurodivergent mode: stimulus reduction, simplified navigation, low cognitive load.
+- Dark mode as a complete adaptation of the visual system.
+
+**Scalability:**
+
+- Support for 10,000–30,000 registered users in Year 1 without redesign.
+- Capacity to grow to 50,000 users without structural redesign.
+- Modular architecture with feature flags and per-tier configurable resource quotas.
+
+**Internationalisation:**
+
+- Support for Spanish (with Spanish-speaking cultural sensitivity) and English from MVP.
+- Architecture ready to add additional languages without redesign.
+- Each new geographic expansion will require cultural validation by local professional.
+
+**Deployment and data sovereignty:**
+
+- European cloud deployment (non-negotiable).
+- Processing of personal data within the EU in first phases.
+- Documentation of subprocessors with justification of international transfers (especially relevant with US expansion).
+- Architectural readiness for HIPAA compliance given the priority market US.
+
+**Post-launch support and maintenance:**
+
+- Documented evolutionary and corrective maintenance plan.
+- Incident response times by severity: critical < 4 hours, high < 24 hours, medium < 5 working days.
+- Technical support available at least during European business hours.
+- Recurring monthly cost broken down and documented migration / exit plan (anti vendor lock-in).
+
+### 3.6 Differentiation: Asha as a defensible asset
 
 Asha is designed from the outset as an **independent and decoupled engine** from the Itabey application, accessible via API. This enables it to be licensed to clinics, insurers, healthcare systems or digital health platforms as white-label technology in later phases.
 
@@ -114,6 +280,18 @@ The corporate offering, from the MVP, includes not only licence management but:
 - Prevention tools.
 
 **Non-negotiable privacy**: the organisation **never** accesses individual personal data or conversations. Only aggregates with minimum cohort size ≥ 10–20 active users.
+
+### 4.3 Internal team and operation
+
+The system contemplates five internal profiles that operate the product from Polymita Systems. Each with its dashboard, capabilities and clearly delimited restrictions:
+
+- **Founder / Super Admin** (Mariela and management team): global system supervision, business metrics, feature flag and tier management, Asha quality supervision, content and knowledge editing, community moderation. Access to sensitive individual data only in specific contexts of support, security or moderation; always audited.
+- **Multidisciplinary clinical and scientific team**: identified professionals in family medicine, gynaecology, mental health, endocrinology, anaesthesia and pain, molecular biology, biochemistry and neurosciences. Validate biomedical content, approve educational capsules, define general clinical criteria and sign off the hard-stop catalogue. **No access to individual user data or conversations.**
+- **Community and forum moderation** (Phase 2 with forum activation): supervision and moderation of the community space, management of reported content, anti-spam tools, sensitive-content detection.
+- **Analytics and data supervision** (Phase 2): aggregate analysis of system behaviour, cohorts, retention, data quality, Asha performance — always on anonymised data, never individual.
+- **Senior technical supervision** (Phase 2): infrastructure, stability, security and overall technical performance monitoring. Read-only, no access to individual clinical data.
+
+**Future profiles architecturally provisioned** (Phase 3): professional patient-management profile — clinicians, social workers or health coaches managing several patients who have given them explicit consent.
 
 ---
 
@@ -264,7 +442,45 @@ If the conversation with the investor warrants it, **there is the option of expa
 
 ---
 
-## 11. Investment terms
+## 11. Key constraints and assumptions
+
+The structuring decisions of the project, articulated as technical, business and regulatory constraints, and the assumptions on which the plan is built:
+
+### 11.1 Technical constraints
+
+- European cloud deployment (non-negotiable in first phases).
+- Standard, maintainable tech stack; the development vendor proposes and justifies, avoiding proprietary lock-in.
+- Asha decoupled from Itabey via API from day 1.
+- Offline-first operation for data recording.
+- Multilingual Spanish + English from MVP, with Spanish-speaking cultural emphasis.
+
+### 11.2 Business constraints
+
+- Freemium model: limited free version + paid version + sponsored B2B.
+- No sale of personal data under any circumstances.
+- Full intellectual property to Polymita Systems SL: code, architecture, prompts, embeddings, configurations, derivative models.
+- Mandatory NDA and confidentiality with the development company.
+- Multidisciplinary clinical team validates all biomedical content before its publication.
+- Curated and clinically validated catalogue of recommendable external apps.
+
+### 11.3 Regulatory constraints
+
+- Full GDPR compliance, with Art. 9 (health data).
+- Asha is **not** a medical device: no diagnosis, no prescription, no professional substitution.
+- DPIA before launch.
+- **HIPAA readiness** from the outset given the priority market US Hispanic.
+
+### 11.4 Key assumptions
+
+- The clinical team will be available before the MVP to validate the initial knowledge base and hard-stop catalogue.
+- GDPR compliance allows processing data in European cloud without additional transfers for the first phase.
+- The initial catalogue of educational capsules (≥ 30) will be available or will be developed in parallel with the product.
+- The first B2B client in MVP will be a controlled pilot with simple company code (not complex enterprise SSO yet).
+- The traction hypothesis assumes organic growth + modest paid acquisition + B2B channel.
+
+---
+
+## 12. Investment terms
 
 | Concept | Detail |
 |---|---|
@@ -282,7 +498,7 @@ If the conversation with the investor warrants it, **there is the option of expa
 
 ---
 
-## 12. Team and advisory board
+## 13. Team and advisory board
 
 **Mariela Herrera Gil — Founder and CEO.** Project vision born from personal experience and years of self-directed research on hormonal regulation, neurodivergence, nervous system, inflammation, sleep and human behaviour. Responsible for strategy, brand identity and product direction.
 
@@ -294,7 +510,7 @@ If the conversation with the investor warrants it, **there is the option of expa
 
 ---
 
-## 13. Why this project, why now
+## 14. Why this project, why now
 
 - **Real and underserved market**: the US Hispanic woman is a large segment, with purchasing power, high digital adoption and poorly represented by leading platforms.
 - **Mature technology**: the combination of AI models, RAG and multi-model architectures now enables a product that 5 years ago was not viable at reasonable cost.
