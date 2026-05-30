@@ -80,6 +80,20 @@ Estas no las podemos fijar a priori, pero el desarrollador debe instrumentar el 
 
 Te propongo que fijemos las variables del bloque 1.1 contigo en una sesión corta (1 hora máximo), las marquemos en el PRD como **hipótesis del proyecto** y se las pasemos al proveedor. Eso le da un punto de partida concreto sin obligarle a inventar. Después, cuando el proveedor presente su propuesta, contestará a las del bloque 1.2.
 
+**A tener en cuenta cuando fijemos las variables del bloque 1.1**: según el análisis de coste con fuentes sectoriales (ver § 2 más abajo y conclusión en § 2.11), **cinco variables son especialmente sensibles al coste de IA** y por tanto al margen del producto. Conviene fijarlas con criterio mixto (UX + financiero), no solo de experiencia de usuaria:
+
+| Variable | Por qué es sensible al coste |
+|---|---|
+| **Mensajes a Asha/mes (premium)** | Es el driver lineal directo del coste IA. Pasar de 100 a 200 mensajes/mes duplica el coste por usuaria. |
+| **Profundidad de memoria de Asha (premium)** | Cada conversación con memoria larga inyecta más tokens de contexto. Una memoria de 24 meses puede costar 3× más por mensaje que una de 6 meses. |
+| **Frecuencia de insights proactivos** | Los insights proactivos son mensajes que Itabey genera sin que la usuaria los pida. Aumentar de 2/semana a 5/semana multiplica el coste por 2,5 sin que la usuaria perciba la diferencia. |
+| **% de interacciones por voz** | TTS y STT añaden coste por minuto. Pasar de 30% a 60% voz puede añadir 1–2 €/usuaria premium/mes. |
+| **Volumen de informes/mes (premium)** | Los informes son operaciones intensivas en tokens. Más de 2/mes erosiona margen. |
+
+Mi propuesta es que estas cinco se fijen con **margen de ajuste por tier**: que el sistema permita activar/desactivar o limitar cada una por tier (esto ya está en FR-1306 del PRD). Así, si en producción detectamos que el coste se desboca, ajustamos los límites antes de que afecte al margen.
+
+Las otras 9 variables del bloque 1.1 también importan pero su impacto en coste es menor o más estable.
+
 ---
 
 ## Q15 — Estimación absoluta del impacto financiero de la evolución del coste de IA
@@ -228,6 +242,36 @@ Las cifras y tendencias citadas en esta sección provienen de:
 - [AI Cost Statistics 2026: Forecasting, ROI, and Budget Risk — Mavvrik](https://www.mavvrik.ai/blog/ai-cost-statistics-2026/)
 - [The Price of Progress: Price Performance and the Future of AI — arXiv](https://arxiv.org/html/2511.23455v2)
 - [Inference Cost Explained: How to Reduce LLM & AI Inference Spend — CloudZero](https://www.cloudzero.com/blog/inference-cost/)
+
+### 2.11 Conclusión del análisis
+
+Tras revisar las fuentes sectoriales, puedo cerrar el análisis con cinco conclusiones claras que tú puedes llevarte directamente al plan financiero y a la conversación con inversores:
+
+**1. La premisa de "inflación 5×–10×" en el precio por token era incorrecta.**
+Las fuentes coinciden: los precios por token están en deflación rápida y sostenida. Es razonable esperar que esa tendencia continúe en el horizonte 2–4 años, con caídas adicionales del 30–50% anual y la predicción de Gartner de –90% para 2030.
+
+**2. El riesgo financiero real no desaparece, solo cambia de naturaleza.**
+El coste **total** por usuaria puede mantenerse o subir por tres mecanismos que actúan a la vez:
+
+   a. *Normalización post-subsidio*: los precios actuales están financiados por capital riesgo. Cuando esto termine (12–24 meses según las fuentes), habrá un ajuste al alza temporal.
+   b. *Inflación de consumo y capacidades*: las aplicaciones de IA tienden a consumir más por usuaria conforme maduran (más contexto, agentes, memoria, multimodalidad).
+   c. *Coste de modelos de frontera*: los más capaces siguen siendo caros por la inversión necesaria para mantener el estado del arte.
+
+**3. La magnitud del riesgo financiero es manejable si la arquitectura es la correcta.**
+El escenario más probable supone un sobrecoste de **130.000–200.000 €/año** respecto al base. El escenario adverso, **300.000–500.000 €/año**. Pero el escenario más peligroso —y evitable— es el de **arquitectura monolítica solo cloud** (**+550.000 €/año**), donde no hay margen para absorber ninguno de los mecanismos anteriores.
+
+**4. La decisión arquitectónica importa más que la decisión de proveedor LLM.**
+Una arquitectura **multi-modelo con mix híbrido (≈70% local OSS self-hosted + ≈30% cloud) y capacidad de switch entre proveedores** amortigua tanto la normalización como las subidas de precio individuales. Una arquitectura monolítica anclada a un único proveedor amplifica cualquier movimiento de precio por 3–5×. Esto **no es un detalle técnico**: es una decisión financiera estructural. Por eso el PRD lo marca como criterio discriminante en la evaluación de proveedores (peso 20%, § 11.4).
+
+**5. La acción concreta a llevar al plan financiero es la siguiente:**
+
+   - **Reservar 100.000–200.000 € en el seed como colchón de IA específico**, además del colchón general de contingencia. Cubre 18–24 meses incluso en escenario adverso si la arquitectura es la correcta.
+   - **Diseñar el pricing del producto con cuotas por tier y B2B basado en consumo** además de per-seat, de forma que cualquier cambio en costes pueda absorberse comercialmente.
+   - **Instrumentar el sistema desde el día 1** para medir coste por usuaria activa y activar contención si supera 5–6 €/mes en premium.
+   - **Exigir al proveedor desarrollador demostración real de capacidad multi-modelo y mix híbrido** (criterio E17 del PRD), no solo declaración de intenciones.
+   - **Mantener un modelo open-source self-hosted operativo como fallback real**, no solo como capacidad teórica. Da poder de negociación con proveedores comerciales y seguro ante normalizaciones bruscas.
+
+> **Una nota sobre la lectura inversor**: este análisis es positivo para Itabey si se ejecuta bien. Mientras los competidores monolíticos sufran la normalización, una arquitectura modular y un mix híbrido convertirán el coste de IA en una **ventaja competitiva sostenible** — no solo en un riesgo a mitigar. Es un mensaje que conviene tener pulido para inversores: "no nos asusta la evolución del coste de IA porque la arquitectura está diseñada para absorberla y aprovecharla".
 
 ---
 
