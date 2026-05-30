@@ -1,7 +1,7 @@
 # Itabey / Asha — Product Requirements Document
 
-**Revision:** 3
-**Revision date:** 2026-05-29
+**Revision:** 4
+**Revision date:** 2026-05-30
 **Owning entity:** Polymita Systems SL
 **Status:** Reference document for development proposal evaluation
 
@@ -43,7 +43,7 @@ The product's core value **does not lie in data capture** but in its capacity fo
 | G4 | Build a clinically validated, versioned biomedical knowledge base as the central asset | Volume of validated capsules, mean time to validation |
 | G5 | Enable Asha as a decoupled, future-licensable engine via API/white-label | Public API coverage, third-party integration time |
 | G6 | Comply with GDPR (Art. 9) and embed Privacy/Security by design from the architecture onward | Successful external audit, zero data breach incidents |
-| G7 | Position the product in Spanish-speaking markets with cultural sensitivity (Spain + LATAM + Hispanic communities in the US) | Geographic distribution of signups, country-level adoption, qualitative satisfaction |
+| G7 | Position the product in the US Hispanic-speaking market as the initial strategic priority, with Spain, LATAM and other Spanish-speaking markets accessible from launch but without initial commercial focus | Geographic distribution of signups, free → premium conversion in US Hispanic, qualitative satisfaction by market |
 
 ### 1.3 Non-goals
 
@@ -210,9 +210,9 @@ Ownership of **all** code, architecture, documentation, flows, functional design
 - **Role:** Organisation that funds Itabey/Asha access for its employees or insured as a wellbeing, prevention, or women's health benefit.
 - **Goal:** Reduce absenteeism, improve engagement, offer a differential benefit, manage predictable cost.
 - **JTBD:** *"I want to offer a solid health and wellbeing tool to my employees without assuming clinical responsibility or accessing their individual data."*
-- **Access:** Linkage via company code, invitation, or enterprise SSO (Phase 2 complete). Own aggregate analytics dashboard (overall usage, aggregate satisfaction, anonymous cohorts), without access to individual data or conversations (FR-1304).
+- **Access:** Linkage via company code, invitation, or enterprise SSO (Phase 2 complete). Own corporate dashboard with **real value proposition from the MVP** (not just licence management): aggregate anonymous analytics, population wellbeing metrics, impact tracking, prevention tools and demonstrable ROI elements. No access to individual data or conversations (FR-1304).
 - **Restrictions:** **Cannot** inherit accounts, **does not** access personal data or conversations, **does not** direct clinical content, **has no** operational control of the system.
-- **Commercial importance:** Low-CAC mass acquisition channel; predictable recurring revenue.
+- **Commercial importance:** **Strategic line from the outset**. Low-CAC mass acquisition channel, predictable recurring revenue, complements individual subscription and contributes to long-term sustainability and growth of the company. For this reason, architecture and main flows are designed from the start with clear B2B orientation, not as a later add-on. The proposition for organisations is not limited to corporate licence management but is built from the start as a premium offering based on aggregate analytics, population wellbeing metrics, impact tracking and prevention tools.
 
 ### 2.4 Internal personas (system operation)
 
@@ -244,9 +244,9 @@ Ownership of **all** code, architecture, documentation, flows, functional design
   - Information preferentially displayed in aggregated, anonymised, or pseudonymised formats.
   - All administrative actions and sensitive reviews recorded via internal audit (NFR-S06).
 
-#### PI2 — **Multidisciplinary clinical team**
+#### PI2 — **Multidisciplinary clinical and scientific team**
 
-- **Role:** Initial team of 5 clinical/health profiles (family medicine, gynaecology, mental health, endocrinology, anaesthesia and pain; progressively expandable).
+- **Role:** Team formed by clinical and scientific profiles of the project. Includes **family medicine, gynaecology, mental health, endocrinology, anaesthesia and pain, molecular biology, biochemistry and neurosciences**, among others. Some profiles already collaborate actively in the conceptual definition of the system; others will formally join as the funding and development phase progresses. Progressively expandable.
 - **Goal:** Biomedical validation, definition of general clinical criteria, protocol review, educational content validation, conceptual supervision of the system.
 - **Dashboard:** FR-1002.
 - **Capabilities:** Entering structured clinical knowledge, validating biomedical content, defining general criteria, reviewing correlations, versioning clinical knowledge, approving educational capsules, defining the hard-stop catalogue.
@@ -498,9 +498,13 @@ Ownership of **all** code, architecture, documentation, flows, functional design
   - All biomedical content is validated and versioned by the clinical team before publication.
   - Capsules feed Asha's RAG base.
 
-#### FR-503 — Podcast recommendations
-- **Phase:** 2 (Evolution) — **Priority:** Could
-- **Description:** Recommendation of project podcast episodes and fragments; automatic transcription; indexing.
+#### FR-503 — Podcast recommendations (Phase 2)
+- **Phase:** 2 (Evolution) — **Priority:** Should
+- **Description:** Recommendation of project podcast episodes. The podcast is created in parallel with product development; no sufficient content will exist before the MVP launch. **The architecture must be prepared from the MVP for Phase 2 use, where Asha can recommend episodes and direct the user via external links** (YouTube or other platforms where content is hosted).
+- **Acceptance criteria:**
+  - Architecture prepared in MVP to store references to external content (URL, platform, metadata).
+  - In Phase 2, Asha can suggest episodes contextually.
+  - The system opens the external link (YouTube or other) — the podcast is not hosted within the app.
 
 ### 3.6 Personalisation (FR-6xx)
 
@@ -606,11 +610,15 @@ Ownership of **all** code, architecture, documentation, flows, functional design
 - **Restrictions:** No code edits, no structural changes, no operational control, no access to individual personal data, no access to conversations.
 
 #### FR-1006 — Corporate dashboard (B2B client)
-- **Phase:** 1 (MVP, minimal aggregate view) / 2 (Evolution, full view) — **Priority:** Should (MVP) / Must (Evolution)
+- **Phase:** 1 (MVP, real value proposition, not just licences) / 2 (Evolution, full view with cohorts and longitudinal trends) — **Priority:** Must (MVP) / Must (Evolution)
 - **Persona:** P5 (corporate client).
-- **MVP content:** Anonymous aggregate metrics — total active employees (≥ 10 to prevent re-identification), aggregate satisfaction, global adoption rate.
-- **Evolution content:** Anonymous cohorts by department (where cohort size allows), aggregate temporal trends, reported benefits, aggregate wellbeing metrics (average energy, aggregate stress levels, etc.).
-- **Restrictions (FR-1304):** **Never** access to individual data, conversations, identities, or metrics enabling re-identification.
+- **MVP content** (premium proposition from the start):
+  - Anonymous aggregate metrics: total active employees (≥ 10 to prevent re-identification), global adoption rate, participation.
+  - **Population wellbeing metrics** (aggregate): general wellbeing level, aggregate stress evolution, general energy or wellbeing trends, perceived collective support need.
+  - **Use of educational resources** (most consulted capsules, topics with most interest).
+  - **ROI indicators** for the organisation to evaluate impact of the wellbeing programme.
+- **Evolution content:** Anonymous cohorts by department (where cohort size allows), aggregate longitudinal temporal trends, reported benefits, period-to-period comparisons, specific prevention tools.
+- **Restrictions (FR-1304):** **Never** access to individual data, conversations, identities, or metrics enabling re-identification. Only aggregates with minimum cohort size of ≥ 10–20 active users.
 
 ### 3.11 External integrations (FR-11xx)
 
@@ -1029,7 +1037,7 @@ Ownership of **all** code, architecture, documentation, flows, functional design
 | A2 | GDPR compliance allows European cloud processing without additional transfers for Spain + EU | Any non-EU service dependency complicates compliance |
 | A3 | Seed traction hypothesis assumes organic growth + modest paid acquisition + B2B channel | Metrics may need revision if acquisition strategy changes |
 | A4 | Initial capsule catalogue (≥ 30) available or developed in parallel with the product | Without content, educational panel and RAG base are empty |
-| A5 | Primary market is **Spanish-speaking** (Spain + LATAM + US Hispanics); each new expansion requires local cultural validation | If international strategy changes (rapid expansion outside Spanish-speaking markets), legal, language, and deployment implications apply |
+| A5 | Priority market is the **US Hispanic community** from launch. Spain, LATAM and other Spanish-speaking markets are accessible without initial commercial focus. The company is registered in Spain and the first version will be developed under European regulatory framework (GDPR and European cloud), but HIPAA compliance must be considered from the outset | If commercial focus changes or full HIPAA compliance is required from MVP, there are legal, deployment and cost implications |
 | A6 | First B2B client in MVP is a controlled pilot with simple company code (no complex enterprise SSO) | If first client requires full enterprise SSO, MVP B2B scope overflows |
 | A7 | Recommendable external app providers (FR-1111) willing to collaborate via deep links / agreements without requiring complex API integration in MVP | If they require complex API integration for the first use case, FR-1111 defers to advanced Phase 2 |
 
@@ -1087,20 +1095,27 @@ Ownership of **all** code, architecture, documentation, flows, functional design
 
 ### 7.5 Business
 
+> Premium subscription set at **17.99 USD/month** as reference (commercially adjustable).
+
 | Metric | Target |
 |--------|--------|
+| Premium subscription price | 17.99 USD/month |
+| Initial ARPU (premium user, before platform commissions) | 17.99 USD/month |
 | Free → individual paid conversion | 5–8% |
-| Monthly paid churn | < 5% |
+| Monthly paid churn | 4–8% |
 | LTV / CAC | ≥ 3 (post-launch at 6 months) |
 | Active B2B clients by Month 18 | 2–3 (aligned with pitch deck) |
 
 ### 7.6 Scale
 
-| Metric | Target |
-|--------|--------|
-| Year 1 registered users | 10,000–30,000 |
-| Year 1 MAU | 3,000–10,000 |
-| No-redesign capacity | 50,000 |
+> The architecture must be dimensioned to support the optimistic scenario without structural redesign.
+
+| Scenario | Registered users | % Premium | Active premium users |
+|---|---|---|---|
+| Conservative | 10,000 | 5% | 500 |
+| Base | 50,000 | 6% | 3,000 |
+| Optimistic | 100,000 | 8% | 8,000 |
+| **Architectural capacity without redesign** | — | — | up to ~10,000 premium / ~150,000 total |
 
 ### 7.7 Community and content (Phase 2)
 
@@ -1138,7 +1153,7 @@ Ownership of **all** code, architecture, documentation, flows, functional design
 | R12 | B2B negotiates low volume prices while infrastructure/AI costs grow | M | High | Per-tier resource quotas from MVP (NFR-SC07), B2B pricing models based on consumption beyond per-seat, B2B tier with limited depth by default |
 | R13 | B2C power users consume disproportionate resources in standard tier | M | Medium | Clear per-tier quotas (FR-1306), upgrade path to premium tier with cost aligned to delivered value |
 | R14 | Tier strategy defined late, forcing product rebuild | L | High | Architectural capability from MVP (FR-1306–1307); commercial tier-content decision can be made at any time without redesign |
-| R15 | LATAM expansion triggers international transfers complicating compliance | M | High | Specific legal analysis by country before each expansion, initial deployment focused on Spain, gradual expansion with updated DPIA |
+| R15 | **Priority market in US Hispanic-speaking activates HIPAA compliance and international transfers** from launch (not waiting for an expansion phase) | H | Critical | Specific legal analysis US (HIPAA + state-level regulations) **before launch**, not after. Specific DPIA for processing data of persons in US. Initial European cloud deployment, with documented evolution strategy to meet HIPAA if it becomes necessary to process data in US jurisdiction |
 | R16 | External app recommendations (FR-1111) perceived as intrusive advertising | M | Medium | Explicit opt-in in FR-904, clinically curated catalogue (no free LLM), "no more recommendations of this type" button, transparency about commercial affiliations |
 | R17 | Insufficient cultural adaptation when expanding outside Spain (LATAM, US Hispanics) | M | Medium | Cultural validation by local professional before each expansion (General Framework § 9, NFR-I04) |
 
@@ -1221,6 +1236,12 @@ Probability: H/M/L. Impact: Critical/High/Medium/Low.
 
 > This section operationalises the requirements so received proposals can be compared structurally.
 
+### 11.0 Reference budget framework
+
+> **Maximum budget envisaged for MVP development (Itabey + Asha): approximately €550,000.**
+>
+> The purpose of this limit is not to constrain the vendor's technical proposal, but to provide a realistic reference framework to evaluate feasibility, scope and priorities. Proposals must reasonably fit this budget or clearly justify any significant deviation. This amount considers a robust, secure and scalable MVP aligned with the functional, technical, privacy and architectural requirements defined in this document.
+
 ### 11.1 Required demonstrable capabilities
 
 - Development of scalable mobile + web applications (verifiable references).
@@ -1249,7 +1270,7 @@ Probability: H/M/L. Impact: Critical/High/Medium/Low.
 | E10 | Security measures and test plan |
 | E11 | Identified technical risks with mitigations |
 | E12 | Documented delivery plan to avoid structural vendor dependency |
-| E13 | **Explanatory video** (FR-702) production / integration plan: vendor's internal production, externalisation to a content partner, or player only + integration (Polymita provides video) |
+| E13 | **Explanatory video integration plan** (FR-702). Confirmed decision: **Polymita Systems provides the video** (production with own audiovisual resources); the development vendor only integrates the player and experience within the application, guaranteeing offline playback if cached, CC subtitles, and ability to skip/revisit from help menu |
 | E14 | **Recurring monthly cost** broken down by component (infrastructure, LLM, voice, vector, human support) and low/medium/high scenarios per 1,000 active users |
 | E15 | **Architectural readiness document for HL7/FHIR**: how the data model can be mapped to those standards in a later phase without structural redesign |
 | E16 | **Migration / exit plan** (anti vendor lock-in): how Polymita Systems would continue operating without the vendor, with time and cost estimate |
@@ -1283,3 +1304,39 @@ Probability: H/M/L. Impact: Critical/High/Medium/Low.
 > - "HealthTech + GDPR experience" is evaluated on verifiable references, not declarations.
 > - A proposal without convincing demonstration of E17 (modular capability) is rejected for the final round, regardless of cost.
 > - A proposal must present **contractual milestones within Phase 1** (E3) with associated payments; proposals demanding single payment without intermediate milestones are rejected due to risk of losing control over cost and timeline.
+
+---
+
+## 12. Reference appendix — Preliminary vision of Free vs Premium tiers
+
+> This section records the **preliminary vision** of the product team on the differentiation between the free version and premium plans. It is **indicative, not prescriptive**: definitive contents of each tier will be decided after approximately 3 months of real usage with a validation cohort, using behavioural data, operating costs, AI consumption and user feedback. The architecture must support this differentiation from day 1 through modular tiering capability (FR-1306) and feature flags (FR-1307).
+>
+> **Important for the development vendor**: this table **does not fix definitive contents per tier**. What the vendor must guarantee is that **any feature in § 3 can be activated or deactivated per tier through configuration**, without redeploy. The specific contents shown here are the first hypothesis of the product team and will be reviewed based on real usage signal.
+
+### 12.1 General differentiation
+
+| Aspect | Free | Premium |
+|---|---|---|
+| Philosophy | Limited core to validate product value | Broad, deep and personalised support |
+| Asha access | Limited conversations (reduced number per day) | Broad, frequent, continuous and deep use |
+| Asha memory | Basic, focused on recent or essential information | Broad memory (more context, patterns, preferences, previous conversations) for personalised responses |
+| Voice | Voice interaction available | Voice + Asha capability to automatically update the dashboard from conversation |
+| Configuration and personalisation | Not available | Adaptation to needs, goals and preferences |
+| Reports and advanced metrics | Restricted | Detailed activity, evolution, habits and pattern information; tracking charts; personalised summaries; documents for sharing with professionals |
+| Internal calendar | Available for all users | Available |
+| Sync with external calendars (Google, Apple, Outlook) | Not available | Available (FR-106 in Phase 2) |
+| Advanced features (personalised support, intelligent analysis, automations) | Not available | Progressively unlocked by tier |
+
+### 12.2 How this connects to the architecture
+
+- Each row above translates into a **feature flag configuration or per-tier quota** (FR-1306, FR-1307).
+- Changing tier content does not require redeploy or code changes.
+- Initial hypothesis: **at least 3 parameterisable tiers** from MVP. Final number and commercial names are product and marketing decisions.
+- B2B vs B2C differentiation is built on the same tiering axis. A corporate client may receive a basic B2B tier for all its employees, with the option that some have access to a higher tier if the organisation funds it.
+
+### 12.3 What this appendix does NOT decide
+
+- Final commercial names of each tier (marketing decision).
+- Definitive pricing (commercial decision).
+- Exact tier received by each B2B client (per-contract decision).
+- Specific numeric limits (messages/day, memory months, etc.) — will be calibrated with real usage signal.
