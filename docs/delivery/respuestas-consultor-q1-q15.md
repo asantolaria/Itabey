@@ -143,7 +143,7 @@ Combinando las cuatro fuerzas anteriores, los escenarios realistas de evolución
 |---|---|---|
 | **Subida controlada** | Arquitectura modular bien ejecutada (mix híbrido 70/30, cuotas claras, fallback OSS operativo). La normalización y el consumo creciente impactan, pero se absorben parcialmente. | **+50%–100%** |
 | **Subida intensa** | Normalización dura de proveedores cloud + consumo agresivo (agentes, multimodal, memoria larga) + uso intensivo de modelos de frontera. | **+200%–400%** |
-| **Subida descontrolada** | Arquitectura monolítica solo cloud, sin mix híbrido. Cualquier subida del proveedor LLM se traslada íntegra al coste por usuaria, sin amortiguación. | **+500%–700%** |
+| **Subida descontrolada** | Arquitectura monolítica solo cloud, sin mix híbrido. Cualquier subida del proveedor LLM se traslada íntegra al coste por usuaria, sin amortiguación. | **+400% a +700%+** |
 
 El factor que determina en cuál de estos tres escenarios cae Itabey **no son los precios del mercado** (esos son comunes a todos los actores) sino **la decisión arquitectónica**. Una arquitectura modular puede contener la subida en el rango "controlado"; una arquitectura monolítica la dispara al "descontrolado".
 
@@ -196,30 +196,39 @@ El factor que determina en cuál de estos tres escenarios cae Itabey **no son lo
 
 ### 2.6 Escenarios de evolución a 2–4 años
 
-Aplicando las cuatro fuerzas descritas en § 2.1 al escenario base de 150.000 €/año, estos son los rangos de coste anual previstos. Todos al alza:
+Aplicando las cuatro fuerzas descritas en § 2.1 a la base de coste actual, los rangos de subida previstos son los siguientes. **Lo robusto son los porcentajes** (vienen del análisis sectorial); los euros son una traducción ilustrativa al escenario base de Itabey que estoy usando para el cálculo *bottom-up* (3.000 premium activas + 27.000 free activas, coste IA actual ~150.000 €/año):
 
-| Escenario | Qué supone | Coste/año estimado | Sobrecoste vs base |
-|---|---|---|---|
-| **Punto de partida (precios actuales)** | Referencia mid-2026 sin cambios | 150.000 € | — |
-| **Subida controlada** | Arquitectura modular bien ejecutada. La presión energética + normalización + crecimiento de consumo impactan, pero el mix híbrido y las cuotas amortiguan. | 230.000 €–300.000 €/año | **+80.000 €–150.000 €/año** |
-| **Subida intensa** | Normalización dura de proveedores cloud + consumo agresivo (agentes, multimodal, memoria larga) + uso intensivo de modelos de frontera. | 450.000 €–650.000 €/año | **+300.000 €–500.000 €/año** |
-| **Subida descontrolada** | Arquitectura monolítica solo cloud, sin mix híbrido, sin cuotas por tier. Cualquier subida del proveedor LLM se traslada íntegra. | 700.000 €+/año | **+550.000 €+/año** |
+| Escenario | Subida sobre el coste IA actual | Traducción ilustrativa (base ~150.000 €/año) |
+|---|---|---|
+| **Punto de partida** | — | 150.000 € (referencia) |
+| **Subida controlada** | **+50% a +100%** | 225.000 €–300.000 €/año (sobrecoste +75.000–150.000 €/año) |
+| **Subida intensa** | **+200% a +400%** | 450.000 €–750.000 €/año (sobrecoste +300.000–600.000 €/año) |
+| **Subida descontrolada** | **+400% a +700%** | 750.000 €–1.200.000 €/año (sobrecoste +600.000–1.050.000 €/año) |
+
+**Qué supone cada escenario** (lo que determina en cuál cae Itabey):
+
+- **Controlada**: arquitectura modular bien ejecutada (mix híbrido 70/30, cuotas claras por tier, fallback OSS operativo). Las cuatro fuerzas impactan pero se amortiguan.
+- **Intensa**: normalización dura de proveedores cloud + consumo agresivo (agentes, multimodal, memoria larga) + uso intensivo de modelos de frontera. La arquitectura sigue siendo modular pero no contiene las cuatro fuerzas a la vez.
+- **Descontrolada**: arquitectura monolítica solo cloud, sin mix híbrido, sin cuotas. Cualquier subida del proveedor LLM se traslada íntegra al coste por usuaria.
+
+**Nota sobre cómo leer las cifras**: si en algún momento cambia tu escenario base (más usuarias, más conversión a premium, menos consumo por usuaria, etc.), los euros cambian, pero los porcentajes de subida se mantienen porque vienen de la estructura del mercado, no del tamaño de Itabey.
 
 ### 2.7 Lectura financiera
 
 Respondiendo directamente tu pregunta original:
 
-- **¿Estamos hablando de decenas de miles o de más de 200.000 €?** **De cientos de miles, en cualquier escenario realista.** No hay un escenario realista en el que el coste se mantenga o baje. La pregunta es la magnitud de la subida:
-  - **Escenario más probable (subida controlada con arquitectura modular bien hecha):** **+80.000 €–150.000 €/año** sobre el base actual.
-  - **Escenario adverso (subida intensa):** **+300.000 €–500.000 €/año**.
-  - **Escenario descontrolado (arquitectura monolítica):** **+550.000 €+/año** — el más peligroso porque es evitable solo con decisiones técnicas correctas.
-- **Lo más importante para tu decisión:** el factor que determina en qué escenario cae Itabey **no son los precios del mercado** (esos son comunes a todos), sino **la decisión arquitectónica**. Una arquitectura sin mix híbrido amplifica cualquier subida por 3–5×. Por eso el mix híbrido es una decisión financiera estructural, no técnica.
+- **¿De qué magnitud estamos hablando?** **Subida estructural sobre el coste IA actual, en cualquier escenario realista**:
+  - **Escenario más probable (subida controlada con arquitectura modular bien hecha):** **+50% a +100%** sobre el coste IA actual.
+  - **Escenario adverso (subida intensa):** **+200% a +400%**.
+  - **Escenario descontrolado (arquitectura monolítica):** **+400% a +700%+** — el más peligroso porque es evitable solo con decisiones técnicas correctas.
+- **Lo más importante para tu decisión:** el factor que determina en qué escenario cae Itabey **no son los precios del mercado** (esos son comunes a todos), sino **la decisión arquitectónica**. Una arquitectura sin mix híbrido amplifica la subida estructural **entre 3× y 5×**. Por eso el mix híbrido es una decisión financiera estructural, no técnica.
+- **Sobre el peso absoluto en euros**: depende del escenario base (volumen de usuarias, mix free/premium, consumo medio). Para el escenario base que estoy manejando (~150.000 €/año en costes IA), la subida controlada se traduce en +75.000–150.000 €/año; la intensa en +300.000–600.000 €/año; la descontrolada en +600.000 €+/año. Si las cifras de tu plan financiero cambian, **aplica los porcentajes a tu nueva base** — son la referencia robusta.
 
 ### 2.8 Implicaciones para tu plan financiero
 
 Las recomendaciones accionables que se derivan del análisis son cinco:
 
-1. **Reservar en el seed un colchón de IA específico** de **150.000 €–300.000 €**, además del colchón general de contingencia. Cubre 18–24 meses asumiendo escenario de subida controlada o intensa con arquitectura modular bien implementada. Si la arquitectura no está bien implementada (escenario descontrolado), ningún colchón razonable la salva — por eso la decisión arquitectónica es la mitigación principal.
+1. **Reservar en el seed un colchón de IA específico equivalente a entre 12 y 24 meses del coste IA previsto del escenario base** (en el cálculo actual: ~150.000 €–300.000 €), además del colchón general de contingencia. Cubre escenario de subida controlada o intensa con arquitectura modular bien implementada. Si la arquitectura no está bien implementada (escenario descontrolado), ningún colchón razonable la salva — por eso la decisión arquitectónica es la mitigación principal.
 2. **Diseñar el pricing del producto desde el inicio para absorber subidas.** Tu suscripción premium en 17,99 USD/mes deja margen, pero conviene que el modelo permita ajustar precios sin perjudicar la base existente. El B2B basado en consumo (no solo per-seat) es clave aquí.
 3. **Revisión trimestral del coste por usuaria activa.** Conviene tener instrumentación desde el día 1 para detectar desvíos pronto. Si el coste por premium activa supera 5 € o 6 € al mes, activar medidas de contención antes de que erosione márgenes.
 4. **Negociación con proveedores LLM clave** a partir del Año 2 cuando haya volumen real para conseguir descuentos por compromiso de capacidad.
@@ -263,14 +272,14 @@ Independientemente de que el precio unitario del token siga bajando (que lo har�
    d. *Coste de los modelos de frontera*: los más capaces siguen subiendo de coste de capacidad por la inversión necesaria para mantener el estado del arte.
 
 **3. La magnitud de la subida depende casi enteramente de la arquitectura, no del mercado.**
-El escenario de **subida controlada** supone un sobrecoste de **80.000–150.000 €/año**. El escenario de **subida intensa**, **300.000–500.000 €/año**. El escenario **descontrolado** (arquitectura monolítica solo cloud), **550.000 €+/año** — y es completamente evitable con decisiones técnicas correctas.
+El escenario de **subida controlada** supone **+50% a +100%** sobre el coste IA actual. El escenario de **subida intensa**, **+200% a +400%**. El escenario **descontrolado** (arquitectura monolítica solo cloud), **+400% a +700%+** — y es completamente evitable con decisiones técnicas correctas. *Traducido al escenario base ~150.000 €/año*: la subida controlada serían +75–150K €/año; la intensa +300–600K €/año; la descontrolada +600K €+/año.
 
 **4. La decisión arquitectónica importa más que la decisión de proveedor LLM.**
 Una arquitectura **multi-modelo con mix híbrido (≈70% local OSS self-hosted + ≈30% cloud) y capacidad de switch entre proveedores** amortigua tanto la normalización como las subidas de precio individuales. Una arquitectura monolítica anclada a un único proveedor amplifica cualquier movimiento de precio por 3–5×. Esto **no es un detalle técnico**: es una decisión financiera estructural. Por eso el PRD lo marca como criterio discriminante en la evaluación de proveedores (peso 20%, § 11.4).
 
 **5. La acción concreta a llevar al plan financiero es la siguiente:**
 
-   - **Reservar 150.000–300.000 € en el seed como colchón de IA específico**, además del colchón general de contingencia. Cubre 18–24 meses asumiendo escenario de subida controlada o intensa con arquitectura modular bien implementada.
+   - **Reservar un colchón de IA específico equivalente a 12–24 meses del coste IA previsto** del escenario base (en el cálculo actual del consultor, ~150.000–300.000 €), además del colchón general de contingencia. Cubre escenario de subida controlada o intensa con arquitectura modular bien implementada.
    - **Diseñar el pricing del producto con cuotas por tier y B2B basado en consumo** además de per-seat, de forma que cualquier cambio en costes pueda absorberse comercialmente.
    - **Instrumentar el sistema desde el día 1** para medir coste por usuaria activa y activar contención si supera 5–6 €/mes en premium.
    - **Exigir al proveedor desarrollador demostración real de capacidad multi-modelo y mix híbrido** (criterio E17 del PRD), no solo declaración de intenciones.
@@ -285,8 +294,8 @@ Una arquitectura **multi-modelo con mix híbrido (≈70% local OSS self-hosted +
 | Pregunta tuya | Respuesta directa |
 |---|---|
 | ¿Qué variables son críticas para dimensionar? | Te he listado **14 variables** que tú debes fijar (1.1) + las que el proveedor cotizará (1.2) + las que mediremos en producción (1.3). Te propongo fijar las del bloque 1.1 en una sesión corta. |
-| ¿Subida de coste de IA: decenas de miles o más de 200.000 €? | **De cientos de miles, en cualquier escenario realista.** El coste neto de operar IA va a subir en términos netos por una combinación de fuerzas estructurales (cuello de botella energético + normalización post-subsidio + consumo creciente + modelos de frontera). Escenario de subida controlada: **+80.000–150.000 €/año**. Subida intensa: **+300.000–500.000 €/año**. Subida descontrolada (arquitectura monolítica): **+550.000 €+/año**. |
-| ¿Qué colchón financiero necesito? | Reservar **150.000 €–300.000 €** específicos para IA en el seed, además del colchón general. Cubre 18–24 meses asumiendo subida controlada o intensa con arquitectura modular bien implementada. |
+| ¿Subida de coste de IA: decenas de miles o más de 200.000 €? | **Subida estructural sobre el coste IA actual, en cualquier escenario realista.** El coste neto de operar IA va a subir por la combinación de cuatro fuerzas (cuello de botella energético + normalización post-subsidio + consumo creciente + modelos de frontera). Subida controlada: **+50% a +100%**. Subida intensa: **+200% a +400%**. Subida descontrolada (arquitectura monolítica): **+400% a +700%+**. *En base ~150K €/año, eso se traduce en sobrecostes de +75–150K, +300–600K o +600K €+/año respectivamente.* |
+| ¿Qué colchón financiero necesito? | Reservar el equivalente a **12–24 meses del coste IA previsto del escenario base** (en el cálculo actual, ~150.000–300.000 €), además del colchón general. Cubre subida controlada o intensa con arquitectura modular bien implementada. |
 | ¿La decisión LLM mixto que confirmaste es suficiente? | **Es necesario, pero hay que ejecutarlo bien.** El mix híbrido (70% modelos pequeños OSS self-hosted, 30% modelo grande comercial) es el factor que más amplifica o mitiga el riesgo. Sin mix híbrido el coste puede triplicarse. Conviene exigir al proveedor demostración real de esa capacidad. |
 
 Cuando me confirmes que con esto puedes avanzar el plan financiero, integro lo que aplique al PRD (las variables de 1.1 como hipótesis del proyecto, las cifras y dinámicas reales en R4) y paso a la Revisión 4 con todas las respuestas tuyas incorporadas.

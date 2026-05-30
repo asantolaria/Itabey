@@ -459,11 +459,13 @@ La deflación del precio por token es real (Gartner predice -90% para 2030), per
 
 **Implicación práctica para Itabey**:
 
-| Escenario a 2–4 años | Coste/año (sobre escenario base ~150.000 €/año) |
-|---|---|
-| Subida controlada (arquitectura modular bien ejecutada) | +80.000–150.000 €/año |
-| Subida intensa (normalización dura + consumo agresivo + frontera) | +300.000–500.000 €/año |
-| Subida descontrolada (arquitectura monolítica solo cloud) | +550.000 €+/año |
+| Escenario a 2–4 años | Subida sobre el coste IA actual | Traducción (base ~150.000 €/año) |
+|---|---|---|
+| Subida controlada (arquitectura modular bien ejecutada) | **+50% a +100%** | +75.000–150.000 €/año |
+| Subida intensa (normalización dura + consumo agresivo + frontera) | **+200% a +400%** | +300.000–600.000 €/año |
+| Subida descontrolada (arquitectura monolítica solo cloud) | **+400% a +700%+** | +600.000 €+/año |
+
+Lo robusto son los porcentajes (vienen de la estructura del mercado, no del tamaño de Itabey). Los euros son una traducción ilustrativa al escenario base actual; si cambian las hipótesis de volumen y mix, los euros cambian pero los porcentajes se mantienen.
 
 **No hay escenario realista en el que el coste se mantenga o baje.** La pregunta no es si subirá, sino cuánto. Y el factor que más determina cuánto subirá **no es el mercado sino la decisión arquitectónica**. Una arquitectura sin mix híbrido amplifica cualquier subida por 3–5×.
 
@@ -471,7 +473,7 @@ La deflación del precio por token es real (Gartner predice -90% para 2030), per
 
 ### 9.2 Recomendaciones financieras derivadas
 
-1. **Reservar en el seed un colchón de IA específico** de **150.000–300.000 €** (además del colchón general). Cubre 18–24 meses asumiendo escenario de subida controlada o intensa con arquitectura modular bien implementada.
+1. **Reservar en el seed un colchón de IA específico equivalente a 12–24 meses del coste IA previsto** del escenario base (~150.000–300.000 € en el cálculo actual; además del colchón general). Cubre escenario de subida controlada o intensa con arquitectura modular bien implementada.
 2. **Pricing del producto con cuotas claras por tier** desde el MVP (ya en el PRD via FR-1306, NFR-SC07).
 3. **B2B basado en consumo además de per-seat** para que el coste IA real se traslade al precio que paga la empresa cliente.
 4. **Revisión trimestral del coste por usuaria activa** una vez en producción.
