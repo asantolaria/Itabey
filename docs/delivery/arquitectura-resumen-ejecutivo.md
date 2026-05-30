@@ -181,9 +181,3 @@ Conviene tenerlo claro al hablar con inversores y proveedores:
 - Si una propuesta encaja en términos generales con este esquema, es buena señal.
 - Si una propuesta se desvía mucho (todo cloud sin IA propia, sistema monolítico sin Asha desacoplada, sin capacidad de switch entre proveedores), conviene preguntar el porqué antes de descartarla.
 - Los criterios del PRD § 11 son los que determinan la evaluación final.
-
----
-
-## En resumen — para una conversación con inversor en una frase
-
-> *"Itabey y Asha están diseñados desde el día 1 con cuatro decisiones que protegen el negocio: Asha desacoplada para licenciamiento futuro, mix híbrido de IA para mantener el coste controlado, capacidad de cambiar de proveedor sin rediseño para no depender de nadie, y arquitectura modular con tiers para que el mismo producto sirva a clientes muy distintos. Estas decisiones no son técnicas: son financieras y estratégicas."*

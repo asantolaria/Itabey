@@ -181,9 +181,3 @@ Worth being clear about when speaking with investors and vendors:
 - If a proposal generally fits this scheme, it is a good sign.
 - If a proposal diverges significantly (all cloud without proprietary AI, monolithic system without Asha decoupled, no switch capability between providers), it is advisable to ask why before discarding — it may have valid reasons or be a sign of inexperience.
 - The criteria in PRD § 11 are what determines final evaluation.
-
----
-
-## In summary — for an investor conversation in one sentence
-
-> *"Itabey and Asha are designed from day 1 with four decisions that protect the business: Asha decoupled for future licensing, hybrid AI mix to keep cost controlled, ability to switch providers without redesign to depend on no one, and modular architecture with tiers so that the same product serves very different clients. These decisions are not technical: they are financial and strategic."*

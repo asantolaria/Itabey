@@ -261,7 +261,4 @@ Si te resulta más cómodo, puedes responder directamente sobre este documento m
 2. Las 5 importantes (Q4–Q6, Q10–Q11) las cerramos en una segunda ronda corta.
 3. Las 4 operativas (Q9, Q12–Q14) las dejamos en *backlog* hasta que el desarrollo esté en marcha.
 
-Cuando me confirmes las respuestas, las integro en el PRD definitivo (versión a enviar a proveedores) y al pitch deck si afecta a alguna cifra.
-
-Un abrazo,
-Alex
+Una vez confirmadas las respuestas, se integrarán al PRD definitivo (versión a enviar a proveedores) y al pitch deck si afectan a alguna cifra.

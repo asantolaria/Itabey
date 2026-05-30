@@ -220,14 +220,10 @@ Mi recomendación es **combinación de B + C** (ampliar la ronda en ~250.000 €
 
 ## Qué viene después
 
-Una vez confirmes lo del colchón financiero (Q15) y, si procede, lo del HIPAA / despliegue inicial (que abrió el cambio del mercado a EE. UU.), tendré todo cerrado para entregar a la empresa desarrolladora.
+Una vez confirmado el colchón financiero (Q15) y, si procede, lo del HIPAA / despliegue inicial (que abrió el cambio del mercado a EE. UU.), quedará todo cerrado para entregar a la empresa desarrolladora.
 
-Mientras tanto, voy a preparar:
+Documentos complementarios disponibles:
 
-- **Dossier inversor** (versión ejecutiva, menos técnica, lista para PDF).
-- **Documento complementario de visión** (módulos, funcionalidades, verticales futuras).
-
-Te los hago llegar en breve.
-
-Un abrazo,
-Alex
+- **PRD versión inversor** (ES y EN, formato ejecutivo, menos técnico).
+- **Documento de visión y verticales futuras** (módulos, funcionalidades, evolución del sistema).
+- **Resumen ejecutivo de arquitectura** (ES y EN, sin tecnicismos).

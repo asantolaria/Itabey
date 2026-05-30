@@ -298,7 +298,4 @@ Una arquitectura **multi-modelo con mix híbrido (≈70% local OSS self-hosted +
 | ¿Qué colchón financiero necesito? | Reservar el equivalente a **12–24 meses del coste IA previsto del escenario base** (en el cálculo actual, ~150.000–300.000 €), además del colchón general. Cubre subida controlada o intensa con arquitectura modular bien implementada. |
 | ¿La decisión LLM mixto que confirmaste es suficiente? | **Es necesario, pero hay que ejecutarlo bien.** El mix híbrido (70% modelos pequeños OSS self-hosted, 30% modelo grande comercial) es el factor que más amplifica o mitiga el riesgo. Sin mix híbrido el coste puede triplicarse. Conviene exigir al proveedor demostración real de esa capacidad. |
 
-Cuando me confirmes que con esto puedes avanzar el plan financiero, integro lo que aplique al PRD (las variables de 1.1 como hipótesis del proyecto, las cifras y dinámicas reales en R4) y paso a la Revisión 4 con todas las respuestas tuyas incorporadas.
-
-Un abrazo,
-Alex
+Cuando se confirme que con esto se puede avanzar el plan financiero, las variables de 1.1 se integrarán al PRD como hipótesis del proyecto y las cifras y dinámicas pasarán a R4 de la siguiente Revisión, con todas las respuestas incorporadas.

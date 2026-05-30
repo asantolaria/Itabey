@@ -192,9 +192,4 @@ Te he enviado por separado el documento `preguntas-abiertas-ceo.md` con las **15
 - **5 importantes** (Q4–Q6, Q10, Q11) — útiles pero no bloquean.
 - **4 operativas** (Q9, Q12, Q13, Q14) — se pueden cerrar más adelante.
 
-Mi recomendación: cerramos primero las 6 críticas en una conversación, y el resto cuando tengas tiempo.
-
----
-
-Un abrazo,
-Alex
+Recomendación: cerrar primero las 6 críticas en una conversación, y el resto cuando haya tiempo.

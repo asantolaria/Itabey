@@ -630,8 +630,3 @@ Este documento es una **propuesta del consultor**, no una arquitectura definitiv
 - Si una propuesta encaja en términos generales con este esquema, es buena señal.
 - Si una propuesta se desvía mucho (todo cloud sin local, microservicios excesivos, arquitectura monolítica sin desacoplar Asha), conviene **preguntar el porqué** antes de descartarla — puede tener razones válidas o puede ser señal de inexperiencia.
 - Los criterios del PRD § 11.4 son los que determinan la evaluación final, no este documento.
-
----
-
-Un abrazo,
-Alex
