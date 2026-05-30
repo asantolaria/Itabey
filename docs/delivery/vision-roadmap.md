@@ -372,7 +372,19 @@ Separación entre datos individuales y datos agregados anonimizados desde el mod
 
 ---
 
-## 6. Sintetizando
+## 6. Nota sobre los horizontes temporales
+
+Los tiempos del roadmap tienen distinto grado de compromiso según su origen:
+
+- **Los hitos del MVP a 18 meses** (lanzamiento mes 7, tracción mes 10, consolidación mes 15, ARR mes 18) **vienen del pitch deck** que Polymita Systems presentó a inversores. Son compromisos comerciales del proyecto.
+- **El horizonte de Fase 3 (24+ meses post-lanzamiento)** está anclado en la decisión de la CEO sobre la vertical de deporte femenino (revisión interna 2026-05-30).
+- **El horizonte de Fase 2 (12–24 meses post-lanzamiento)** es una **estimación orientativa del consultor** basada en el alcance de la fase y en el juicio profesional sobre plazos razonables en healthtech B2C. Es revisable por el proveedor desarrollador en su propuesta.
+
+En todos los casos, los tiempos concretos de implementación los ajustará el proveedor desarrollador en su oferta técnica.
+
+---
+
+## 7. Sintetizando
 
 | Fase | Horizonte | Foco principal | Resultado esperado |
 |---|---|---|---|

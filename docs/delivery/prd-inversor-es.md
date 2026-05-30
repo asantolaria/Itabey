@@ -427,6 +427,8 @@ Si la conversación con el inversor lo justifica, **existe la opción de ampliar
 | 15 | Consolidación de Métricas de Tracción Orgánica — 5.000–10.000 usuarias activas, primeros ingresos recurrentes, producto en mejora continua. |
 | 18 | Consolidación del Modelo y Escalado — 10.000–20.000 usuarias, ARR 120.000–240.000 €, 2–3 pilotos B2B activos, modelo validado para escalado. |
 
+> **Nota sobre los horizontes temporales**: los hitos a 18 meses son compromisos del pitch deck. Los horizontes de Fase 2 (12–24 meses post-lanzamiento) y Fase 3 (24+ meses) son estimaciones orientativas basadas en el alcance de cada fase y la respuesta de la CEO sobre la vertical de deporte. Los tiempos concretos de implementación los ajustará el proveedor desarrollador en su oferta técnica.
+
 ---
 
 ## 10. Riesgos principales y mitigaciones

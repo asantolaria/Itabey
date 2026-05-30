@@ -427,6 +427,8 @@ If the conversation with the investor warrants it, **there is the option of expa
 | 15 | Consolidation of Organic Traction Metrics — 5,000–10,000 active users, first recurring revenue, product in continuous improvement. |
 | 18 | Model Consolidation and Scaling — 10,000–20,000 users, ARR €120,000–240,000, 2–3 active B2B pilots, model validated for scaling. |
 
+> **Note on time horizons**: the 18-month milestones are pitch-deck commitments. The horizons for Phase 2 (12–24 months post-launch) and Phase 3 (24+ months) are indicative estimates based on the scope of each phase and the CEO's response on the women's sports vertical. The specific implementation timelines will be adjusted by the development vendor in their technical offer.
+
 ---
 
 ## 10. Key risks and mitigations
