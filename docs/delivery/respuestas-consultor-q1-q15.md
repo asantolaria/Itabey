@@ -113,33 +113,39 @@ Las otras 9 variables del bloque 1.1 también importan pero su impacto en coste 
 > | **Mix híbrido** | Combinación de modelo grande comercial (para conversaciones complejas) + modelo pequeño open-source (para tareas estructuradas y RAG) |
 > | **Frontera** | Modelos más capaces y nuevos en cada momento — siempre los más caros |
 
-Para responder a tu pregunta con cifras concretas, he combinado dos análisis: (a) una revisión de las fuentes sectoriales sobre la evolución del coste de IA y sus dinámicas estructurales, y (b) un cálculo *bottom-up* del coste actual y los escenarios futuros aplicados a tu caso concreto. Te explico ambos y la conclusión accionable al final (§ 2.11).
+**El mensaje central, antes de entrar en cifras:** según las fuentes sectoriales consultadas, **el coste de operar sistemas basados en IA va a subir en términos netos** en el horizonte 2–4 años. Esa subida es independiente de si el precio unitario del token sube o baja (de hecho, va a bajar) — viene impulsada por una combinación de factores estructurales que se acumulan. Para tu plan financiero, **lo correcto es asumir que la factura mensual de IA crecerá**, y dimensionar el colchón y la arquitectura para absorberlo.
 
-### 2.1 Tendencia del coste de IA según las fuentes
+A continuación te explico (a) las **cuatro fuerzas** que están empujando el coste neto al alza, (b) un cálculo *bottom-up* del coste actual de Itabey, y (c) los rangos de subida esperados con su impacto financiero. La conclusión accionable está al final (§ 2.11).
 
-**Tendencia histórica documentada:**
+### 2.1 Por qué va a subir el coste de operar IA
 
-- Los precios por token han caído **aproximadamente 10× en 2 años** (2024 → 2026): un modelo equivalente a GPT-4 pasó de costar ~$30/millón tokens en 2024 a $2–3/millón en 2026 ([CloudZero](https://www.cloudzero.com/blog/llm-api-pricing-comparison/), [Epoch AI](https://epoch.ai/data-insights/llm-inference-price-trends)).
-- Hay analistas que reportan caídas aún mayores: GPT-4 equivalente costaba $20/millón en 2022, en 2026 cuesta $0,40/millón — una reducción del **1000×** en 3 años ([Sesame Disk](https://sesamedisk.com/ai-inference-cost-trends-2026/)).
-- **Gartner predice** que para 2030 la inferencia sobre un LLM de 1 billón de parámetros costará **más del 90% menos** que en 2025 ([Gartner, marzo 2026](https://www.gartner.com/en/newsroom/press-releases/2026-03-25-gartner-predicts-that-by-2030-performing-inference-on-an-llm-with-1-trillion-parameters-will-cost-genai-providers-over-90-percent-less-than-in-2025)).
+Las fuentes sectoriales coinciden en que **cuatro fuerzas estructurales** están empujando el coste neto de la IA al alza, aunque el precio por token aisladamente esté bajando:
 
-**Pero hay tres mecanismos que pueden hacer subir el coste total por usuaria**, aunque el precio unitario baje:
+**1. Cuello de botella de infraestructura física (energía + chips + data centers).**
+La demanda mundial de electricidad para alimentar data centers de IA está saturando redes eléctricas en muchas regiones. El coste de las GPUs de última generación sigue alto por escasez. Esto encarece tanto el cloud comercial **como** la operación de infraestructura propia. Analistas como Moody's y Goldman Sachs lo señalan como **el cuello de botella principal** del coste de IA a 3–5 años vista ([Mavvrik](https://www.mavvrik.ai/blog/ai-cost-statistics-2026/)).
 
-1. **Modelos de frontera siguen siendo caros.** El coste de los modelos más capaces (los que ofrecen valor diferencial en cada momento) ha subido aproximadamente **18× por año**, por la inversión necesaria para empujar el estado del arte ([arxiv.org](https://arxiv.org/html/2511.23455v2)). Si Itabey usa siempre el último modelo de frontera disponible, paga la prima de novedad.
-2. **El consumo por aplicación crece.** Los precios bajan pero **el bill mensual sube** porque las aplicaciones usan más contexto, multimodalidad, agentes y razonamiento. Empresas que planificaron presupuestos con precios de 2024 están viendo bills mucho mayores de lo previsto en 2026 ([CloudZero](https://www.cloudzero.com/blog/inference-cost/), [Mavvrik](https://www.mavvrik.ai/blog/ai-cost-statistics-2026/)). La inferencia representa hoy el **85% del gasto en IA empresarial**.
-3. **Los precios actuales están subsidiados.** OpenAI pierde **$1,35 por cada $1 que ingresa**; proyecta $14.000 M de pérdidas en 2026. Los precios actuales están financiados por capital riesgo y subsidios cruzados de hyperscalers, y **se espera normalización en los próximos 12–24 meses** ([Axios](https://www.axios.com/2026/03/12/ai-models-costs-ipo-pricing), [CNBC](https://www.cnbc.com/2026/05/20/cheap-ai-could-derail-openai-and-anthropics-ipos.html), [AI Automation Global](https://aiautomationglobal.com/blog/ai-inference-cost-crisis-openai-economics-2026)).
+**2. Normalización post-subsidio de los proveedores LLM.**
+Los precios actuales de OpenAI, Anthropic, Google y similares están **subvencionados por capital riesgo y subsidios cruzados de hyperscalers**. OpenAI pierde **$1,35 por cada $1 ingresado** y proyecta $14.000 M de pérdidas en 2026. Esta política comercial es **insostenible**: se espera normalización en los próximos 12–24 meses con subidas en suscripciones, licencias y APIs comerciales ([Axios](https://www.axios.com/2026/03/12/ai-models-costs-ipo-pricing), [CNBC](https://www.cnbc.com/2026/05/20/cheap-ai-could-derail-openai-and-anthropics-ipos.html), [AI Automation Global](https://aiautomationglobal.com/blog/ai-inference-cost-crisis-openai-economics-2026)).
 
-### 2.2 Tres escenarios relevantes para Itabey
+**3. Crecimiento del volumen de uso por aplicación.**
+Aunque el precio por token baje, las aplicaciones **consumen mucho más** conforme maduran: más contexto, agentes autónomos trabajando 24/7, multimodalidad, razonamiento longitudinal. Empresas que planificaron presupuesto con precios de 2024 están viendo facturas significativamente mayores en 2026 a pesar de la deflación de tokens. La inferencia representa ya el **85% del gasto IA empresarial** ([CloudZero](https://www.cloudzero.com/blog/inference-cost/), [Mavvrik](https://www.mavvrik.ai/blog/ai-cost-statistics-2026/)).
 
-Combinando las tres dinámicas anteriores (deflación, consumo creciente, normalización post-subsidio), conviene plantear tres escenarios con direcciones distintas para el coste por usuaria:
+**4. Coste de los modelos de frontera.**
+Los modelos más capaces y nuevos en cada momento (los que ofrecen valor diferencial) suben de coste de capacidad aproximadamente **18× por año** por la inversión necesaria para mantener el estado del arte ([arXiv](https://arxiv.org/html/2511.23455v2)). Quien usa siempre el modelo más nuevo paga la prima de novedad.
 
-| Escenario | Qué supone | Dirección del coste por usuaria |
+**Nota sobre la deflación del precio por token.** Es real y está documentada: los precios han caído ~10× en 2 años, y Gartner predice **–90% para 2030** ([CloudZero](https://www.cloudzero.com/blog/llm-api-pricing-comparison/), [Epoch AI](https://epoch.ai/data-insights/llm-inference-price-trends), [Gartner](https://www.gartner.com/en/newsroom/press-releases/2026-03-25-gartner-predicts-that-by-2030-performing-inference-on-an-llm-with-1-trillion-parameters-will-cost-genai-providers-over-90-percent-less-than-in-2025)). Pero **esa deflación unitaria no compensa la suma de las cuatro fuerzas anteriores**. En todos los análisis sectoriales el resultado neto es el mismo: el coste de operar IA subirá.
+
+### 2.2 Tres escenarios de subida relevantes para Itabey
+
+Combinando las cuatro fuerzas anteriores, los escenarios realistas de evolución del coste para Itabey son **todos al alza**. La pregunta no es si subirá sino cuánto. Te planteo tres escenarios con magnitudes distintas:
+
+| Escenario | Qué supone | Magnitud de subida del coste por usuaria |
 |---|---|---|
-| **Deflación tecnológica continúa** | La tendencia 2022–2026 se mantiene. Modelos antiguos y open-source compiten agresivamente. Precios bajan 30–50% anual. | **Coste por usuaria baja o se mantiene.** |
-| **Normalización + consumo creciente** | Los precios de modelos subsidiados se normalizan (subida 2–3× temporalmente al desaparecer subsidio VC) y el producto consume más por usuaria (más memoria, multimodal, agentes). | **Coste por usuaria sube 50–150%.** |
-| **Frontera + consumo agresivo** | Itabey decide usar siempre el modelo más capaz disponible (caro) para conversación profunda. El consumo crece intensivamente. La normalización golpea con subsidios reducidos. | **Coste por usuaria sube 200–400%.** |
+| **Subida controlada** | Arquitectura modular bien ejecutada (mix híbrido 70/30, cuotas claras, fallback OSS operativo). La normalización y el consumo creciente impactan, pero se absorben parcialmente. | **+50%–100%** |
+| **Subida intensa** | Normalización dura de proveedores cloud + consumo agresivo (agentes, multimodal, memoria larga) + uso intensivo de modelos de frontera. | **+200%–400%** |
+| **Subida descontrolada** | Arquitectura monolítica solo cloud, sin mix híbrido. Cualquier subida del proveedor LLM se traslada íntegra al coste por usuaria, sin amortiguación. | **+500%–700%** |
 
-El riesgo financiero real está en la **combinación de normalización post-subsidio + consumo creciente + uso de modelos de frontera**, no en una inflación simple del precio del token.
+El factor que determina en cuál de estos tres escenarios cae Itabey **no son los precios del mercado** (esos son comunes a todos los actores) sino **la decisión arquitectónica**. Una arquitectura modular puede contener la subida en el rango "controlado"; una arquitectura monolítica la dispara al "descontrolado".
 
 ### 2.3 Asunciones del cálculo bottom-up
 
@@ -190,31 +196,30 @@ El riesgo financiero real está en la **combinación de normalización post-subs
 
 ### 2.6 Escenarios de evolución a 2–4 años
 
-Aplicando las dinámicas descritas en § 2.1 y § 2.2 al escenario base, estos son los rangos de coste anual previstos:
+Aplicando las cuatro fuerzas descritas en § 2.1 al escenario base de 150.000 €/año, estos son los rangos de coste anual previstos. Todos al alza:
 
 | Escenario | Qué supone | Coste/año estimado | Sobrecoste vs base |
 |---|---|---|---|
-| **Deflación continúa** | Precio token baja 30%/año, consumo se mantiene, mix híbrido se mantiene | 70.000 €–100.000 €/año | **-50.000 € a -80.000 €/año** (ahorro) |
-| **Base estable** | Precios y consumo se compensan | 150.000 € | — |
-| **Normalización moderada + consumo creciente** | Modelo grande sube 2× por normalización, consumo crece 50%, mix híbrido absorbe | 280.000 €–350.000 €/año | **+130.000 €–200.000 €/año** |
-| **Normalización dura + frontera** | Modelo grande sube 3–4×, consumo crece 2×, uso intensivo de frontera | 450.000 €–650.000 €/año | **+300.000 €–500.000 €/año** |
-| **Sin mitigación arquitectónica** | Proveedor entrega arquitectura sin mix híbrido, solo modelo grande comercial | 700.000 €+/año | **+550.000 €+/año** |
+| **Punto de partida (precios actuales)** | Referencia mid-2026 sin cambios | 150.000 € | — |
+| **Subida controlada** | Arquitectura modular bien ejecutada. La presión energética + normalización + crecimiento de consumo impactan, pero el mix híbrido y las cuotas amortiguan. | 230.000 €–300.000 €/año | **+80.000 €–150.000 €/año** |
+| **Subida intensa** | Normalización dura de proveedores cloud + consumo agresivo (agentes, multimodal, memoria larga) + uso intensivo de modelos de frontera. | 450.000 €–650.000 €/año | **+300.000 €–500.000 €/año** |
+| **Subida descontrolada** | Arquitectura monolítica solo cloud, sin mix híbrido, sin cuotas por tier. Cualquier subida del proveedor LLM se traslada íntegra. | 700.000 €+/año | **+550.000 €+/año** |
 
 ### 2.7 Lectura financiera
 
 Respondiendo directamente tu pregunta original:
 
-- **¿Estamos hablando de decenas de miles o de más de 200.000 €?** La magnitud del impacto depende del escenario:
-  - En el **escenario más probable (normalización moderada + consumo creciente)** el sobrecoste sería de **+130.000 €–200.000 €/año** respecto al base actual. Es decir, **del orden de cientos de miles, no decenas de miles**, pero **manejable con la arquitectura adecuada**.
-  - En el **escenario adverso (normalización dura + frontera)** subiría a **+300.000 €–500.000 €/año**.
-  - En el **escenario optimista (deflación continúa)**, podríamos incluso **ahorrar 50.000 €–80.000 €/año** respecto a las cifras actuales.
-- **Lo más importante**: el factor que **más amplifica el riesgo no son los precios**, sino la **decisión arquitectónica**. Una arquitectura sin mix híbrido amplifica cualquier movimiento de precio por 3–5×. Por eso el mix híbrido es una decisión financiera, no técnica.
+- **¿Estamos hablando de decenas de miles o de más de 200.000 €?** **De cientos de miles, en cualquier escenario realista.** No hay un escenario realista en el que el coste se mantenga o baje. La pregunta es la magnitud de la subida:
+  - **Escenario más probable (subida controlada con arquitectura modular bien hecha):** **+80.000 €–150.000 €/año** sobre el base actual.
+  - **Escenario adverso (subida intensa):** **+300.000 €–500.000 €/año**.
+  - **Escenario descontrolado (arquitectura monolítica):** **+550.000 €+/año** — el más peligroso porque es evitable solo con decisiones técnicas correctas.
+- **Lo más importante para tu decisión:** el factor que determina en qué escenario cae Itabey **no son los precios del mercado** (esos son comunes a todos), sino **la decisión arquitectónica**. Una arquitectura sin mix híbrido amplifica cualquier subida por 3–5×. Por eso el mix híbrido es una decisión financiera estructural, no técnica.
 
 ### 2.8 Implicaciones para tu plan financiero
 
 Las recomendaciones accionables que se derivan del análisis son cinco:
 
-1. **Reservar en el seed un colchón de IA específico** de **100.000 €–200.000 €**, además del colchón general de contingencia. Cubre 18–24 meses incluso en escenario adverso si el mix híbrido está bien implementado.
+1. **Reservar en el seed un colchón de IA específico** de **150.000 €–300.000 €**, además del colchón general de contingencia. Cubre 18–24 meses asumiendo escenario de subida controlada o intensa con arquitectura modular bien implementada. Si la arquitectura no está bien implementada (escenario descontrolado), ningún colchón razonable la salva — por eso la decisión arquitectónica es la mitigación principal.
 2. **Diseñar el pricing del producto desde el inicio para absorber subidas.** Tu suscripción premium en 17,99 USD/mes deja margen, pero conviene que el modelo permita ajustar precios sin perjudicar la base existente. El B2B basado en consumo (no solo per-seat) es clave aquí.
 3. **Revisión trimestral del coste por usuaria activa.** Conviene tener instrumentación desde el día 1 para detectar desvíos pronto. Si el coste por premium activa supera 5 € o 6 € al mes, activar medidas de contención antes de que erosione márgenes.
 4. **Negociación con proveedores LLM clave** a partir del Año 2 cuando haya volumen real para conseguir descuentos por compromiso de capacidad.
@@ -247,25 +252,25 @@ Las cifras y tendencias citadas en esta sección provienen de:
 
 Cinco conclusiones que puedes llevarte directamente al plan financiero y a la conversación con inversores:
 
-**1. La tendencia del precio por token es de deflación rápida y sostenida.**
-Las fuentes coinciden: los precios por token han caído ~10× en 2 años y se espera que esa tendencia continúe en el horizonte 2–4 años, con caídas adicionales del 30–50% anual y la predicción de Gartner de –90% para 2030. **El precio unitario no es la fuente principal de riesgo financiero**.
+**1. El coste de operar IA va a subir en términos netos.**
+Independientemente de que el precio unitario del token siga bajando (que lo hará), la **factura mensual neta de IA subirá** en horizonte 2–4 años. Esto está documentado por todas las fuentes sectoriales consultadas y es la lectura consensuada de analistas como Moody's, Goldman Sachs y Gartner. Para el plan financiero, **la hipótesis correcta es que el coste sube**, no que se mantiene o baja.
 
-**2. El riesgo financiero real existe, pero proviene de otras dinámicas.**
-El coste **total** por usuaria puede mantenerse o subir por tres mecanismos que actúan a la vez:
+**2. La subida viene de cuatro fuerzas estructurales que se acumulan.**
 
-   a. *Normalización post-subsidio*: los precios actuales están financiados por capital riesgo. Cuando esto termine (12–24 meses según las fuentes), habrá un ajuste al alza temporal.
-   b. *Inflación de consumo y capacidades*: las aplicaciones de IA tienden a consumir más por usuaria conforme maduran (más contexto, agentes, memoria, multimodalidad).
-   c. *Coste de modelos de frontera*: los más capaces siguen siendo caros por la inversión necesaria para mantener el estado del arte.
+   a. *Cuello de botella de infraestructura física*: la demanda de electricidad, chips y data centers para IA está saturando capacidad y disparando costes operativos. Afecta tanto al cloud comercial como a la infraestructura propia.
+   b. *Normalización post-subsidio*: los precios actuales de los proveedores LLM están subvencionados por capital riesgo. Esa política es insostenible y se espera ajuste al alza en 12–24 meses.
+   c. *Inflación de consumo*: las aplicaciones de IA consumen más por usuaria conforme maduran (más contexto, agentes 24/7, multimodalidad, memoria larga).
+   d. *Coste de los modelos de frontera*: los más capaces siguen subiendo de coste de capacidad por la inversión necesaria para mantener el estado del arte.
 
-**3. La magnitud del riesgo financiero es manejable si la arquitectura es la correcta.**
-El escenario más probable supone un sobrecoste de **130.000–200.000 €/año** respecto al base. El escenario adverso, **300.000–500.000 €/año**. Pero el escenario más peligroso —y evitable— es el de **arquitectura monolítica solo cloud** (**+550.000 €/año**), donde no hay margen para absorber ninguno de los mecanismos anteriores.
+**3. La magnitud de la subida depende casi enteramente de la arquitectura, no del mercado.**
+El escenario de **subida controlada** supone un sobrecoste de **80.000–150.000 €/año**. El escenario de **subida intensa**, **300.000–500.000 €/año**. El escenario **descontrolado** (arquitectura monolítica solo cloud), **550.000 €+/año** — y es completamente evitable con decisiones técnicas correctas.
 
 **4. La decisión arquitectónica importa más que la decisión de proveedor LLM.**
 Una arquitectura **multi-modelo con mix híbrido (≈70% local OSS self-hosted + ≈30% cloud) y capacidad de switch entre proveedores** amortigua tanto la normalización como las subidas de precio individuales. Una arquitectura monolítica anclada a un único proveedor amplifica cualquier movimiento de precio por 3–5×. Esto **no es un detalle técnico**: es una decisión financiera estructural. Por eso el PRD lo marca como criterio discriminante en la evaluación de proveedores (peso 20%, § 11.4).
 
 **5. La acción concreta a llevar al plan financiero es la siguiente:**
 
-   - **Reservar 100.000–200.000 € en el seed como colchón de IA específico**, además del colchón general de contingencia. Cubre 18–24 meses incluso en escenario adverso si la arquitectura es la correcta.
+   - **Reservar 150.000–300.000 € en el seed como colchón de IA específico**, además del colchón general de contingencia. Cubre 18–24 meses asumiendo escenario de subida controlada o intensa con arquitectura modular bien implementada.
    - **Diseñar el pricing del producto con cuotas por tier y B2B basado en consumo** además de per-seat, de forma que cualquier cambio en costes pueda absorberse comercialmente.
    - **Instrumentar el sistema desde el día 1** para medir coste por usuaria activa y activar contención si supera 5–6 €/mes en premium.
    - **Exigir al proveedor desarrollador demostración real de capacidad multi-modelo y mix híbrido** (criterio E17 del PRD), no solo declaración de intenciones.
@@ -280,8 +285,8 @@ Una arquitectura **multi-modelo con mix híbrido (≈70% local OSS self-hosted +
 | Pregunta tuya | Respuesta directa |
 |---|---|
 | ¿Qué variables son críticas para dimensionar? | Te he listado **14 variables** que tú debes fijar (1.1) + las que el proveedor cotizará (1.2) + las que mediremos en producción (1.3). Te propongo fijar las del bloque 1.1 en una sesión corta. |
-| ¿Subida de coste de IA: decenas de miles o más de 200.000 €? | Las fuentes sectoriales muestran que el precio por token está **bajando** rápidamente (10× en 2 años, Gartner predice 90% menos para 2030). El riesgo financiero real no es la inflación del token sino la **combinación de normalización post-subsidio + consumo creciente + uso de modelos de frontera**. Escenario más probable: **+130.000 € a +200.000 €/año** adicionales. Escenario adverso: +300.000 € a +500.000 €/año. |
-| ¿Qué colchón financiero necesito? | Reservar **100.000 €–200.000 €** específicos para IA en el seed, además del colchón general. Cubre 18–24 meses incluso en escenario adverso si el mix híbrido está bien implementado. |
+| ¿Subida de coste de IA: decenas de miles o más de 200.000 €? | **De cientos de miles, en cualquier escenario realista.** El coste neto de operar IA va a subir en términos netos por una combinación de fuerzas estructurales (cuello de botella energético + normalización post-subsidio + consumo creciente + modelos de frontera). Escenario de subida controlada: **+80.000–150.000 €/año**. Subida intensa: **+300.000–500.000 €/año**. Subida descontrolada (arquitectura monolítica): **+550.000 €+/año**. |
+| ¿Qué colchón financiero necesito? | Reservar **150.000 €–300.000 €** específicos para IA en el seed, además del colchón general. Cubre 18–24 meses asumiendo subida controlada o intensa con arquitectura modular bien implementada. |
 | ¿La decisión LLM mixto que confirmaste es suficiente? | **Es necesario, pero hay que ejecutarlo bien.** El mix híbrido (70% modelos pequeños OSS self-hosted, 30% modelo grande comercial) es el factor que más amplifica o mitiga el riesgo. Sin mix híbrido el coste puede triplicarse. Conviene exigir al proveedor demostración real de esa capacidad. |
 
 Cuando me confirmes que con esto puedes avanzar el plan financiero, integro lo que aplique al PRD (las variables de 1.1 como hipótesis del proyecto, las cifras y dinámicas reales en R4) y paso a la Revisión 4 con todas las respuestas tuyas incorporadas.

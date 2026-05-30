@@ -446,30 +446,32 @@ Para una usuaria premium con 120 mensajes/mes: ~$2,64/mes. Coincide con el cálc
 
 ### 9.1 Resumen del análisis
 
-He revisado las fuentes sectoriales sobre evolución de precios de IA para 2026–2030 para entender el riesgo financiero real. La conclusión:
+**Mensaje central**: según las fuentes sectoriales consultadas (Moody's, Goldman Sachs, Gartner y analistas especializados), **el coste de operar IA va a subir en términos netos** en el horizonte 2–4 años. Esta subida es independiente de que el precio unitario del token siga bajando (lo hará): viene impulsada por una combinación de fuerzas estructurales que se acumulan.
 
-**Los precios por token están bajando dramáticamente, pero el coste total por usuaria puede mantenerse o subir.** Tres dinámicas combinadas:
+Cuatro fuerzas estructurales empujan al alza:
 
-1. **Deflación tecnológica** (mejora de modelos, competencia, hardware): los precios por token han caído ~10× en 2 años. Gartner predice -90% para 2030.
-2. **Inflación de consumo y capacidades**: las aplicaciones consumen más por usuaria (más contexto, agentes, multimodalidad).
-3. **Normalización post-subsidio**: los precios actuales están subsidiados (OpenAI pierde $1,35 por cada $1 ingresado). Se espera normalización en 12–24 meses.
+1. **Cuello de botella de infraestructura física**: demanda de electricidad, chips y data centers saturando capacidad, encarece tanto el cloud comercial como la operación de infraestructura propia.
+2. **Normalización post-subsidio**: los precios actuales de los proveedores LLM están subvencionados por capital riesgo (OpenAI pierde $1,35 por cada $1 ingresado). Esa política es insostenible y se espera ajuste al alza en 12–24 meses.
+3. **Inflación de consumo y capacidades**: las aplicaciones consumen más por usuaria conforme maduran (más contexto, agentes 24/7, multimodalidad, memoria larga).
+4. **Coste de los modelos de frontera**: los más capaces siguen subiendo de coste de capacidad (~18× por año en estado del arte).
+
+La deflación del precio por token es real (Gartner predice -90% para 2030), pero **no compensa la suma de las cuatro fuerzas anteriores**.
 
 **Implicación práctica para Itabey**:
 
 | Escenario a 2–4 años | Coste/año (sobre escenario base ~150.000 €/año) |
 |---|---|
-| Deflación continúa | **Ahorro** 50.000–80.000 €/año |
-| Normalización moderada + consumo creciente (más probable) | +130.000–200.000 €/año |
-| Normalización dura + uso de modelos de frontera | +300.000–500.000 €/año |
-| Sin mitigación arquitectónica (arquitectura monolítica solo cloud) | +550.000 €/año |
+| Subida controlada (arquitectura modular bien ejecutada) | +80.000–150.000 €/año |
+| Subida intensa (normalización dura + consumo agresivo + frontera) | +300.000–500.000 €/año |
+| Subida descontrolada (arquitectura monolítica solo cloud) | +550.000 €+/año |
 
-El factor que más amplifica el riesgo NO es la inflación de precios, sino la **decisión arquitectónica**. Una arquitectura sin mix híbrido amplifica cualquier subida por 3–5×.
+**No hay escenario realista en el que el coste se mantenga o baje.** La pregunta no es si subirá, sino cuánto. Y el factor que más determina cuánto subirá **no es el mercado sino la decisión arquitectónica**. Una arquitectura sin mix híbrido amplifica cualquier subida por 3–5×.
 
-**Por eso esta propuesta de arquitectura insiste tanto en el mix híbrido + capacidad de switch de proveedor.** No es un detalle técnico: es una decisión financiera.
+**Por eso esta propuesta de arquitectura insiste tanto en el mix híbrido + capacidad de switch de proveedor.** No es un detalle técnico: es una decisión financiera estructural.
 
 ### 9.2 Recomendaciones financieras derivadas
 
-1. **Reservar en el seed un colchón de IA específico** de 100.000–200.000 € (además del colchón general). Cubre 18–24 meses incluso en escenario adverso si el mix híbrido está bien implementado.
+1. **Reservar en el seed un colchón de IA específico** de **150.000–300.000 €** (además del colchón general). Cubre 18–24 meses asumiendo escenario de subida controlada o intensa con arquitectura modular bien implementada.
 2. **Pricing del producto con cuotas claras por tier** desde el MVP (ya en el PRD via FR-1306, NFR-SC07).
 3. **B2B basado en consumo además de per-seat** para que el coste IA real se traslade al precio que paga la empresa cliente.
 4. **Revisión trimestral del coste por usuaria activa** una vez en producción.
@@ -479,23 +481,30 @@ El factor que más amplifica el riesgo NO es la inflación de precios, sino la *
 
 El análisis se basa en las siguientes fuentes públicas verificables:
 
-**Tendencia de precios (deflación):**
+**Infraestructura y demanda energética (Moody's, Goldman Sachs y analistas):**
 
-- [LLM inference prices have fallen rapidly but unequally across tasks — Epoch AI](https://epoch.ai/data-insights/llm-inference-price-trends)
-- [LLM API Pricing Comparison In 2026: Every Major Model, Ranked By Cost — CloudZero](https://www.cloudzero.com/blog/llm-api-pricing-comparison/)
-- [AI Inference Cost Trends in 2026: Tokens, Model Size, and Economics — Sesame Disk](https://sesamedisk.com/ai-inference-cost-trends-2026/)
-- [Gartner: by 2030, performing inference on a 1-trillion-parameter LLM will cost over 90% less than in 2025](https://www.gartner.com/en/newsroom/press-releases/2026-03-25-gartner-predicts-that-by-2030-performing-inference-on-an-llm-with-1-trillion-parameters-will-cost-genai-providers-over-90-percent-less-than-in-2025)
+- [AI Cost Statistics 2026: Forecasting, ROI, and Budget Risk — Mavvrik](https://www.mavvrik.ai/blog/ai-cost-statistics-2026/)
 
-**Insostenibilidad de precios actuales (subsidio):**
+**Normalización post-subsidio (los precios actuales son insostenibles):**
 
 - [AI Inference Cost Crisis 2026: Why OpenAI Loses $1.35 Per Dollar Earned — AI Automation Global](https://aiautomationglobal.com/blog/ai-inference-cost-crisis-openai-economics-2026)
 - [AI companies like OpenAI, Google cover costs. But not forever — Axios](https://www.axios.com/2026/03/12/ai-models-costs-ipo-pricing)
 - [Cheap AI could derail OpenAI and Anthropic's IPOs — CNBC](https://www.cnbc.com/2026/05/20/cheap-ai-could-derail-openai-and-anthropics-ipos.html)
 
-**Paradoja del coste total (sube aunque el unitario baje):**
+**Crecimiento del consumo (la factura sube aunque el unitario baje):**
 
-- [AI Cost Statistics 2026: Forecasting, ROI, and Budget Risk — Mavvrik](https://www.mavvrik.ai/blog/ai-cost-statistics-2026/)
 - [Inference Cost Explained: How to Reduce LLM & AI Inference Spend — CloudZero](https://www.cloudzero.com/blog/inference-cost/)
+
+**Coste de los modelos de frontera (suben de capacidad):**
+
+- [The Price of Progress: Price Performance and the Future of AI — arXiv](https://arxiv.org/html/2511.23455v2)
+
+**Deflación del precio unitario (contrapunto necesario):**
+
+- [LLM inference prices have fallen rapidly but unequally across tasks — Epoch AI](https://epoch.ai/data-insights/llm-inference-price-trends)
+- [LLM API Pricing Comparison In 2026: Every Major Model, Ranked By Cost — CloudZero](https://www.cloudzero.com/blog/llm-api-pricing-comparison/)
+- [AI Inference Cost Trends in 2026: Tokens, Model Size, and Economics — Sesame Disk](https://sesamedisk.com/ai-inference-cost-trends-2026/)
+- [Gartner: by 2030, performing inference on a 1-trillion-parameter LLM will cost over 90% less than in 2025](https://www.gartner.com/en/newsroom/press-releases/2026-03-25-gartner-predicts-that-by-2030-performing-inference-on-an-llm-with-1-trillion-parameters-will-cost-genai-providers-over-90-percent-less-than-in-2025)
 
 **Coste de modelos de frontera:**
 
