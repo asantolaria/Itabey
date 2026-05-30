@@ -27,10 +27,10 @@ The system is split into four pieces with clear and separate responsibilities. E
 
 ```mermaid
 flowchart TB
-    User(["User"]) -->|uses| App["The application<br/>iOS · Android · Responsive web"]
-    App -->|requests data<br/>and responses| Platform["Itabey platform<br/>(operational brain)<br/>Accounts · Data · Permissions<br/>Tiers · Notifications · Reports<br/>Internal dashboards"]
-    Platform -->|delegates when<br/>intelligence is needed| Asha["Asha engine<br/>(independent service)<br/>Licensable to third parties in Phase 3"]
-    Platform -->|connects<br/>to external systems| External["External integrations<br/>Apple Health · Google Health Connect<br/>Google Calendar · Apple Calendar<br/>Wearables and external apps (Phase 2)"]
+    User(["User"]) -->|uses| App["The application<br/>iOS, Android and Responsive web"]
+    App -->|requests data<br/>and responses| Platform["Itabey platform<br/>The operational brain<br/>Accounts, data and permissions<br/>Tiers, notifications and reports<br/>Internal dashboards"]
+    Platform -->|delegates when<br/>intelligence is needed| Asha["Asha engine<br/>Independent service<br/>Licensable to third parties in Phase 3"]
+    Platform -->|connects to<br/>external systems| External["External integrations<br/>Apple Health and Google Health Connect<br/>Google Calendar and Apple Calendar<br/>Wearables and external apps in Phase 2"]
 
     style Asha fill:#e1f5e1,stroke:#2d7a2d,stroke-width:2px
     style Platform fill:#e8f0fe,stroke:#1a73e8,stroke-width:2px
@@ -74,19 +74,19 @@ The Asha engine has several sub-pieces. It is worth understanding the conceptual
 
 ```mermaid
 flowchart TB
-    Input["What the user says<br/>(text or voice)"] --> Orch["Orchestrator<br/>(Asha's brain)<br/>Decides which AI to use"]
+    Input["What the user says<br/>by text or voice"] --> Orch["Orchestrator<br/>Asha's brain<br/>Decides which AI to use"]
 
-    Orch -->|structured tasks<br/>~70% of traffic| Local["Proprietary AI<br/>(European infrastructure)<br/>Cheap · Private · Fast"]
+    Orch -->|structured tasks<br/>approximately 70%| Local["Proprietary AI<br/>Hosted on European infrastructure<br/>Cheap, private and fast"]
 
-    Orch -->|deep conversation<br/>~30% of traffic| Cloud["Cloud AI<br/>(Claude or equivalent)<br/>More capable · More expensive"]
+    Orch -->|deep conversation<br/>approximately 30%| Cloud["Cloud AI<br/>Claude or equivalent<br/>More capable and more expensive"]
 
-    Orch -->|consults before<br/>responding on health| KB["Clinical knowledge base<br/>validated and versioned<br/>(DEFENSIBLE ASSET)"]
+    Orch -->|consults before<br/>responding on health| KB["Clinical knowledge base<br/>validated and versioned<br/>DEFENSIBLE ASSET"]
 
-    Orch -->|remembers<br/>selectively| Memory["Per-user memory<br/>Patterns, preferences,<br/>useful conclusions<br/>(not full conversation)"]
+    Orch -->|remembers<br/>selectively| Memory["Per-user memory<br/>Patterns, preferences<br/>and useful conclusions<br/>Not the full conversation"]
 
     Orch -.->|first safety filter| HardStop["Hard-stop protocol<br/>Predefined validated messages<br/>for severe signals"]
 
-    Local --> Response["Response to user<br/>(text + voice if applicable)"]
+    Local --> Response["Response to user<br/>Text and voice if applicable"]
     Cloud --> Response
     HardStop -.-> Response
 

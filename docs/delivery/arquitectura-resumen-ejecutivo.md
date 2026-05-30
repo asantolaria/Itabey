@@ -27,10 +27,10 @@ El sistema se divide en cuatro piezas con responsabilidades claras y separadas. 
 
 ```mermaid
 flowchart TB
-    Usuaria(["Usuaria"]) -->|usa| App["La aplicación<br/>iOS · Android · Web responsive"]
-    App -->|pide datos<br/>y respuestas| Platform["Plataforma Itabey<br/>(el cerebro operativo)<br/>Cuentas · Datos · Permisos<br/>Tiers · Notificaciones · Informes<br/>Dashboards internos"]
-    Platform -->|delega cuando<br/>hace falta inteligencia| Asha["Motor Asha<br/>(servicio independiente)<br/>Licenciable a terceros en Fase 3"]
-    Platform -->|conecta<br/>con sistemas externos| External["Integraciones externas<br/>Apple Health · Google Health Connect<br/>Google Calendar · Apple Calendar<br/>Wearables y apps externas (Fase 2)"]
+    Usuaria(["Usuaria"]) -->|usa| App["La aplicación<br/>iOS, Android y Web responsive"]
+    App -->|pide datos<br/>y respuestas| Platform["Plataforma Itabey<br/>El cerebro operativo<br/>Cuentas, datos y permisos<br/>Tiers, notificaciones e informes<br/>Dashboards internos"]
+    Platform -->|delega cuando<br/>hace falta inteligencia| Asha["Motor Asha<br/>Servicio independiente<br/>Licenciable a terceros en Fase 3"]
+    Platform -->|conecta con<br/>sistemas externos| External["Integraciones externas<br/>Apple Health y Google Health Connect<br/>Google Calendar y Apple Calendar<br/>Wearables y apps externas en Fase 2"]
 
     style Asha fill:#e1f5e1,stroke:#2d7a2d,stroke-width:2px
     style Platform fill:#e8f0fe,stroke:#1a73e8,stroke-width:2px
@@ -74,19 +74,19 @@ El motor Asha tiene varias sub-piezas. Conviene entender la lógica conceptual p
 
 ```mermaid
 flowchart TB
-    Input["Lo que la usuaria dice<br/>(texto o voz)"] --> Orch["Orquestador<br/>(el cerebro de Asha)<br/>Decide qué IA usar"]
+    Input["Lo que la usuaria dice<br/>por texto o voz"] --> Orch["Orquestador<br/>El cerebro de Asha<br/>Decide qué IA usar"]
 
-    Orch -->|tareas estructuradas<br/>~70% del tráfico| Local["IA propia<br/>(infraestructura europea)<br/>Barata · Privada · Rápida"]
+    Orch -->|tareas estructuradas<br/>aproximadamente 70%| Local["IA propia<br/>Alojada en infraestructura europea<br/>Barata, privada y rápida"]
 
-    Orch -->|conversación profunda<br/>~30% del tráfico| Cloud["IA cloud<br/>(Claude o equivalente)<br/>Más capaz · Más cara"]
+    Orch -->|conversación profunda<br/>aproximadamente 30%| Cloud["IA cloud<br/>Claude o equivalente<br/>Más capaz y más cara"]
 
-    Orch -->|consulta antes<br/>de responder sobre salud| KB["Base de conocimiento<br/>clínica validada<br/>(ACTIVO DEFENDIBLE)"]
+    Orch -->|consulta antes<br/>de responder sobre salud| KB["Base de conocimiento<br/>clínica validada<br/>ACTIVO DEFENDIBLE"]
 
-    Orch -->|recuerda<br/>selectivamente| Memory["Memoria por usuaria<br/>Patrones, preferencias,<br/>conclusiones útiles<br/>(no conversación completa)"]
+    Orch -->|recuerda<br/>selectivamente| Memory["Memoria por usuaria<br/>Patrones, preferencias<br/>y conclusiones útiles<br/>No la conversación completa"]
 
-    Orch -.->|primer filtro<br/>de seguridad| HardStop["Protocolo de hard-stop<br/>Mensajes predefinidos validados<br/>ante señales graves"]
+    Orch -.->|primer filtro<br/>de seguridad| HardStop["Protocolo hard-stop<br/>Mensajes predefinidos validados<br/>ante señales graves"]
 
-    Local --> Response["Respuesta a la usuaria<br/>(texto + voz si aplica)"]
+    Local --> Response["Respuesta a la usuaria<br/>Texto y voz si aplica"]
     Cloud --> Response
     HardStop -.-> Response
 
