@@ -95,6 +95,66 @@ El sistema se compone de **cuatro capas funcionales** y **una capa de infraestru
 
 A grandes rasgos: **la usuaria interactúa con el frontend**, que habla con **Itabey** (la plataforma), que a su vez delega al **motor Asha** cuando hay que conversar, interpretar o generar contenido. Asha por dentro elige entre **modelo local** (barato, privado, rápido para tareas estructuradas) o **modelo cloud** (más capaz, para conversación profunda).
 
+### 1.1 Diagrama Mermaid de capas
+
+Versión Mermaid del diagrama anterior, renderizable en GitHub, VS Code, Obsidian y la mayoría de conversores Markdown a PDF:
+
+```mermaid
+flowchart TB
+    subgraph FE["1. FRONTEND (la app)"]
+        Mobile["App móvil iOS + Android"]
+        Web["Web responsive"]
+    end
+
+    subgraph BE["2. BACKEND ITABEY (la plataforma)"]
+        Auth["Auth · RBAC<br/>Gestión de usuarias"]
+        Data["Datos longitudinales"]
+        Tiers["Tiers + Feature flags"]
+        Dash["Dashboards internos"]
+        Notifs["Notificaciones"]
+        Reports["Generación de informes"]
+    end
+
+    subgraph Asha["3. MOTOR ASHA (servicio independiente)"]
+        Orch["Orquestador"]
+        LocalAI["Modelos locales OSS<br/>self-hosted (Llama, Mistral)"]
+        CloudAI["Modelos cloud<br/>(Claude / GPT / Gemini)"]
+        RAG["RAG + Memoria<br/>(almacén vectorial)"]
+        Voice["Voz<br/>(Whisper STT · ElevenLabs TTS)"]
+    end
+
+    subgraph Ext["4. INTEGRACIONES EXTERNAS"]
+        Health["Apple Health<br/>Google Health Connect"]
+        Cal["Google Calendar<br/>Apple Calendar"]
+        Wear["Wearables avanzados<br/>(Fase 2)"]
+        ExtApps["Apps externas<br/>+ deep links (Fase 2)"]
+    end
+
+    subgraph Infra["5. INFRAESTRUCTURA COMÚN (cloud europeo)"]
+        DB["PostgreSQL"]
+        Storage["Object storage"]
+        CDN["CDN"]
+        Monitor["Monitorización · Logs<br/>Auditoría · Backups"]
+    end
+
+    FE -->|HTTPS/REST<br/>+ WebSocket voz| BE
+    BE -->|API interna| Asha
+    BE -->|API externa| Ext
+    Asha -.- Infra
+    BE -.- Infra
+
+    Orch --> LocalAI
+    Orch --> CloudAI
+    Orch --> RAG
+    Orch --> Voice
+
+    style Asha fill:#e1f5e1,stroke:#2d7a2d,stroke-width:2px
+    style BE fill:#e8f0fe,stroke:#1a73e8,stroke-width:2px
+    style FE fill:#fff4e6,stroke:#e8a13c,stroke-width:2px
+    style Ext fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    style Infra fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px
+```
+
 ---
 
 ## 2. Frontend (la aplicación)
@@ -408,6 +468,42 @@ Te lo cuento siguiendo el flujo de una interacción típica: **la usuaria dice p
     - Reproduce audio.
     - Muestra registros confirmados en panel.
     - Actualiza calendario interno.
+```
+
+**Diagrama de secuencia (Mermaid)** del mismo flujo, renderizable en GitHub, VS Code, Obsidian y conversores a PDF:
+
+```mermaid
+sequenceDiagram
+    actor U as Usuaria
+    participant FE as Frontend
+    participant BE as Backend Itabey
+    participant Asha as Motor Asha
+    participant STT as Whisper (STT)
+    participant Local as Modelo local
+    participant RAG as RAG + memoria
+    participant Cloud as Modelo cloud
+    participant TTS as ElevenLabs (TTS)
+
+    U->>FE: "Ayer dormí mal y hoy me duele la cabeza" (voz)
+    FE->>BE: Audio (WebSocket)
+    BE->>Asha: Procesar entrada
+    Asha->>STT: Transcribir audio
+    STT-->>Asha: Texto transcrito
+    Asha->>Local: Clasificar + extraer entidades
+    Local-->>Asha: {sueño:mal, síntoma:cefalea, consulta:sí}
+    Asha->>BE: Persistir registros estructurados
+    BE-->>Asha: OK
+    Asha->>Local: Filtro de seguridad (¿hard-stop?)
+    Local-->>Asha: Sin riesgo grave — proceder
+    Asha->>RAG: Buscar contexto + memoria usuaria
+    RAG-->>Asha: Chunks validados + patrones previos
+    Asha->>Cloud: Generar respuesta empática
+    Cloud-->>Asha: Texto con disclaimer
+    Asha->>TTS: Convertir a voz
+    TTS-->>Asha: Audio
+    Asha-->>BE: Respuesta completa
+    BE-->>FE: Audio + texto + sugerencias
+    FE-->>U: Reproduce voz · actualiza panel y calendario
 ```
 
 **Coste estimado de esta interacción completa** (precios mid-2026):

@@ -25,6 +25,19 @@ Three ideas to keep in mind for investor conversations:
 
 The system is split into four pieces with clear and separate responsibilities. Each piece communicates with the others through well-defined channels.
 
+```mermaid
+flowchart TB
+    User(["User"]) -->|uses| App["The application<br/>iOS · Android · Responsive web"]
+    App -->|requests data<br/>and responses| Platform["Itabey platform<br/>(operational brain)<br/>Accounts · Data · Permissions<br/>Tiers · Notifications · Reports<br/>Internal dashboards"]
+    Platform -->|delegates when<br/>intelligence is needed| Asha["Asha engine<br/>(independent service)<br/>Licensable to third parties in Phase 3"]
+    Platform -->|connects<br/>to external systems| External["External integrations<br/>Apple Health · Google Health Connect<br/>Google Calendar · Apple Calendar<br/>Wearables and external apps (Phase 2)"]
+
+    style Asha fill:#e1f5e1,stroke:#2d7a2d,stroke-width:2px
+    style Platform fill:#e8f0fe,stroke:#1a73e8,stroke-width:2px
+    style App fill:#fff4e6,stroke:#e8a13c,stroke-width:2px
+    style External fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+```
+
 ### The application (the app the user uses)
 
 What the user sees and touches: the mobile app on her iPhone or Android, and the web version. The calendar, panels, recording forms, conversation with Asha and all the screens live here.
@@ -58,6 +71,31 @@ The piece that talks to external systems: Apple Health, Google Health Connect, G
 ## 3. How Asha works inside (the conceptual logic)
 
 The Asha engine has several sub-pieces. It is worth understanding the conceptual logic because it explains the costs and the asset's defensibility.
+
+```mermaid
+flowchart TB
+    Input["What the user says<br/>(text or voice)"] --> Orch["Orchestrator<br/>(Asha's brain)<br/>Decides which AI to use"]
+
+    Orch -->|structured tasks<br/>~70% of traffic| Local["Proprietary AI<br/>(European infrastructure)<br/>Cheap · Private · Fast"]
+
+    Orch -->|deep conversation<br/>~30% of traffic| Cloud["Cloud AI<br/>(Claude or equivalent)<br/>More capable · More expensive"]
+
+    Orch -->|consults before<br/>responding on health| KB["Clinical knowledge base<br/>validated and versioned<br/>(DEFENSIBLE ASSET)"]
+
+    Orch -->|remembers<br/>selectively| Memory["Per-user memory<br/>Patterns, preferences,<br/>useful conclusions<br/>(not full conversation)"]
+
+    Orch -.->|first safety filter| HardStop["Hard-stop protocol<br/>Predefined validated messages<br/>for severe signals"]
+
+    Local --> Response["Response to user<br/>(text + voice if applicable)"]
+    Cloud --> Response
+    HardStop -.-> Response
+
+    style KB fill:#fff9c4,stroke:#f9a825,stroke-width:3px
+    style Orch fill:#e8f0fe,stroke:#1a73e8,stroke-width:2px
+    style Local fill:#e1f5e1,stroke:#2d7a2d,stroke-width:2px
+    style Cloud fill:#e1f5e1,stroke:#2d7a2d,stroke-width:2px
+    style HardStop fill:#ffcdd2,stroke:#c62828,stroke-width:2px
+```
 
 ### The orchestrator (Asha's brain)
 

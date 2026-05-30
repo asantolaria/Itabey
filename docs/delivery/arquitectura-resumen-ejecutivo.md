@@ -25,6 +25,19 @@ Tres ideas que conviene retener para conversaciones con inversores:
 
 El sistema se divide en cuatro piezas con responsabilidades claras y separadas. Cada pieza habla con las demás a través de canales bien definidos.
 
+```mermaid
+flowchart TB
+    Usuaria(["Usuaria"]) -->|usa| App["La aplicación<br/>iOS · Android · Web responsive"]
+    App -->|pide datos<br/>y respuestas| Platform["Plataforma Itabey<br/>(el cerebro operativo)<br/>Cuentas · Datos · Permisos<br/>Tiers · Notificaciones · Informes<br/>Dashboards internos"]
+    Platform -->|delega cuando<br/>hace falta inteligencia| Asha["Motor Asha<br/>(servicio independiente)<br/>Licenciable a terceros en Fase 3"]
+    Platform -->|conecta<br/>con sistemas externos| External["Integraciones externas<br/>Apple Health · Google Health Connect<br/>Google Calendar · Apple Calendar<br/>Wearables y apps externas (Fase 2)"]
+
+    style Asha fill:#e1f5e1,stroke:#2d7a2d,stroke-width:2px
+    style Platform fill:#e8f0fe,stroke:#1a73e8,stroke-width:2px
+    style App fill:#fff4e6,stroke:#e8a13c,stroke-width:2px
+    style External fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+```
+
 ### La aplicación (la app que usa la usuaria)
 
 Es lo que la usuaria ve y toca: la app móvil en su iPhone o Android, y la versión web. Aquí viven el calendario, los paneles, los formularios de registro, la conversación con Asha y todas las pantallas.
@@ -58,6 +71,31 @@ Es la pieza que habla con sistemas de fuera: Apple Health, Google Health Connect
 ## 3. Cómo funciona Asha por dentro (lo conceptual)
 
 El motor Asha tiene varias sub-piezas. Conviene entender la lógica conceptual porque es la que explica los costes y la defensibilidad del activo.
+
+```mermaid
+flowchart TB
+    Input["Lo que la usuaria dice<br/>(texto o voz)"] --> Orch["Orquestador<br/>(el cerebro de Asha)<br/>Decide qué IA usar"]
+
+    Orch -->|tareas estructuradas<br/>~70% del tráfico| Local["IA propia<br/>(infraestructura europea)<br/>Barata · Privada · Rápida"]
+
+    Orch -->|conversación profunda<br/>~30% del tráfico| Cloud["IA cloud<br/>(Claude o equivalente)<br/>Más capaz · Más cara"]
+
+    Orch -->|consulta antes<br/>de responder sobre salud| KB["Base de conocimiento<br/>clínica validada<br/>(ACTIVO DEFENDIBLE)"]
+
+    Orch -->|recuerda<br/>selectivamente| Memory["Memoria por usuaria<br/>Patrones, preferencias,<br/>conclusiones útiles<br/>(no conversación completa)"]
+
+    Orch -.->|primer filtro<br/>de seguridad| HardStop["Protocolo de hard-stop<br/>Mensajes predefinidos validados<br/>ante señales graves"]
+
+    Local --> Response["Respuesta a la usuaria<br/>(texto + voz si aplica)"]
+    Cloud --> Response
+    HardStop -.-> Response
+
+    style KB fill:#fff9c4,stroke:#f9a825,stroke-width:3px
+    style Orch fill:#e8f0fe,stroke:#1a73e8,stroke-width:2px
+    style Local fill:#e1f5e1,stroke:#2d7a2d,stroke-width:2px
+    style Cloud fill:#e1f5e1,stroke:#2d7a2d,stroke-width:2px
+    style HardStop fill:#ffcdd2,stroke:#c62828,stroke-width:2px
+```
 
 ### El orquestador (el cerebro de Asha)
 
