@@ -173,13 +173,13 @@ La tabla incluye 9 ejes diferenciadores:
 
 **Qué cambia:** El riesgo R4 sigue siendo Alto/Crítico (sin cambios respecto a Rev 3). Las mitigaciones se mantienen alineadas con el análisis que te hice llegar en `respuestas-consultor-q1-q15.md` y `arquitectura-preliminar.md`.
 
-**Pendiente de tu decisión** (te lo mando aparte por email): el colchón financiero específico para IA en la ronda seed. Tres caminos posibles según tu apetito de riesgo:
+El análisis identifica tres opciones de plan financiero para absorber distintos escenarios de subida del coste de IA:
 
-- **A — Mantener ronda actual** (1,5 M €) con colchón de 12–24 meses del coste IA del escenario base.
-- **B — Ampliar ronda en ~250.000 €** específicamente para colchón IA reforzado.
-- **C — Mantener ronda + pricing absorbente** para trasladar parcialmente las subidas.
+- **A — Mantener ronda actual** (1,5 M €) con colchón equivalente a 12–24 meses del coste IA del escenario base.
+- **B — Ampliar ronda** con colchón IA reforzado adicional.
+- **C — Mantener ronda + pricing absorbente** para trasladar parcialmente las subidas vía cuotas por tier y modelo basado en consumo.
 
-Mi recomendación es **combinación de B + C** (ampliar la ronda en ~250.000 € y diseñar el pricing desde el inicio con cuotas y modelo basado en consumo). Pero la decisión es tuya, y la reflejaré en el PRD una vez la confirmes.
+La decisión sobre cuál de estas opciones encaja mejor con la estrategia financiera y la conversación con inversores corresponde al equipo financiero del proyecto. Las consecuencias técnicas de cada opción están ya reflejadas en la arquitectura del PRD (mix híbrido obligatorio, capacidad de switch entre proveedores, cuotas por tier, instrumentación desde el día 1). Cuando la decisión se cierre, se ajustarán los apartados financieros del PRD y del dossier inversor si procede.
 
 ---
 

@@ -163,7 +163,7 @@ Four facts that sectoral sources tell us (Moody's, Goldman Sachs, Gartner, Epoch
 
 **It is not the market that decides which of the three scenarios Itabey lands in: it is the architectural decision.** This is why this proposal insists so much on the hybrid mix and on the ability to switch providers.
 
-**Concrete financial implication**: it is advisable to reserve within the seed round a buffer equivalent to 12–24 months of the AI cost forecast for the base scenario (estimated at ~€150,000–300,000), in addition to the general buffer. Three options I detailed in a separate email (A: keep round, B: expand by €200–400K specifically for AI buffer, C: absorbent pricing from day 1). The decision is yours.
+**Financial implication**: the analysis indicates that to absorb the controlled or intense scenario with reasonable margin, it would be coherent to reserve within the seed round a specific AI buffer equivalent to 12–24 months of the projected base-scenario cost (estimated at approximately €150,000–300,000), in addition to the general contingency buffer. The decision on the concrete sizing of the buffer, and on whether it makes sense to expand the round or adjust the product's pricing to absorb increases, corresponds to the project's financial team.
 
 ---
 

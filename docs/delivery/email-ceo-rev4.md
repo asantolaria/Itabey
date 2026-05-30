@@ -8,21 +8,21 @@
 
 Hola Mariela,
 
-Te paso la versión definitiva del PRD (Revisión 4) tras integrar las 14 respuestas que me hiciste llegar al documento de preguntas abiertas, junto con varios documentos complementarios que serán útiles para distintas audiencias (tú misma, inversores y, cuando cerremos los puntos pendientes, la empresa desarrolladora).
+Te paso la versión definitiva del PRD (Revisión 4) tras integrar las 14 respuestas que me hiciste llegar al documento de preguntas abiertas, junto con varios documentos complementarios pensados para distintas audiencias.
 
 ## Lo que ha cambiado desde la última conversación
 
 He incorporado todas tus respuestas al PRD. Los cambios principales:
 
-- **Mercado prioritario reorientado a hispanohablantes en EE. UU.** (con implicaciones regulatorias HIPAA que conviene cerrar contigo).
+- **Mercado prioritario reorientado a hispanohablantes en EE. UU.** y sus implicaciones técnicas y regulatorias reflejadas en el documento.
 - **Presupuesto MVP fijado en 550.000 €** como marco de referencia explícito.
-- **B2B estratégico desde el MVP** (no solo gestión de licencias, sino dashboard corporativo con valor real desde el lanzamiento).
+- **B2B estratégico desde el MVP** (dashboard corporativo con valor real desde el lanzamiento, no solo gestión de licencias).
 - **Equipo clínico y científico ampliado** con biología molecular, bioquímica y neurociencias.
 - **Métricas alineadas con tus escenarios** (17,99 USD/mes, conservador/base/optimista).
-- **Vertical deporte a Fase 3** (24+ meses).
+- **Vertical deporte movida a Fase 3** (24+ meses).
 - **Anexo orientativo de tiers free vs premium** integrado.
 - **Vídeo explicativo** confirmado opción A (Polymita aporta).
-- **Análisis de coste IA** reflejado en el PRD con porcentajes y opciones de colchón financiero.
+- **Análisis de evolución del coste de IA** reflejado en el PRD con porcentajes y consideración de colchón financiero.
 
 El detalle completo de los cambios está en `cambios-prd-rev4.md`.
 
@@ -32,63 +32,46 @@ Organizados por destinatario para que sepas qué mandar a quién.
 
 ### Para ti, como referencia interna
 
-- `cambios-prd-rev4.md` — Resumen ejecutivo de los cambios respecto a la Rev 3, organizados por temas. Lectura rápida.
-- `respuestas-consultor-q1-q15.md` — Análisis detallado con fuentes sectoriales (Moody's, Goldman Sachs, Gartner, Epoch AI y otras) sobre la evolución prevista del coste de IA, las cuatro fuerzas estructurales que la empujan al alza y las implicaciones financieras concretas.
-- `arquitectura-resumen-ejecutivo.md` — Arquitectura técnica explicada en lenguaje no técnico, con diagramas. Útil para que tengas tú la idea clara y para que se la pases a quien la necesite.
+- `cambios-prd-rev4.md` — Resumen ejecutivo de los cambios respecto a la Rev 3, organizados por temas.
+- `respuestas-consultor-q1-q15.md` — Análisis con fuentes sectoriales (Moody's, Goldman Sachs, Gartner, Epoch AI y otras) sobre la evolución prevista del coste de IA, las cuatro fuerzas estructurales que la empujan al alza y las implicaciones financieras concretas.
+- `arquitectura-resumen-ejecutivo.md` — Arquitectura técnica explicada en lenguaje no técnico, con diagramas.
 
 ### Para enviar a inversores
 
 - `prd-inversor-es.md` y `prd-inversor-en.md` — Versión del PRD enfocada a inversores, condensada y sin tecnicismos de bajo nivel, con visión, mercado, modelo de negocio, plan financiero, hitos, riesgos, términos de inversión y equipo. Disponible en español e inglés.
 - `vision-roadmap.md` — Documento complementario sobre las funcionalidades, módulos y verticales futuras previstas para Itabey/Asha (deporte, adaptación masculina, perfil profesional gestor, licenciamiento de Asha, HL7/FHIR, investigación científica, expansión internacional).
-- `arquitectura-resumen-ejecutivo.md` y `-en.md` — La misma arquitectura ejecutiva mencionada arriba, con diagramas. Sirve también para inversores que pidan entender la dimensión técnica sin entrar en detalle.
+- `arquitectura-resumen-ejecutivo.md` y `-en.md` — Arquitectura ejecutiva con diagramas, útil también para inversores que pidan entender la dimensión técnica sin entrar en detalle.
 
-### Para enviar a la empresa desarrolladora (cuando cerremos los pendientes de abajo)
+### Para enviar a la empresa desarrolladora
 
-- `prd-itabey-asha-es.md` y `prd-itabey-asha-en.md` — PRD técnico completo, en español e inglés. Incluye requisitos funcionales numerados, requisitos no funcionales, restricciones, criterios de evaluación de proveedores, anexo de tiers preliminar.
-- `arquitectura-preliminar.md` — Propuesta arquitectónica preliminar del consultor. Sirve como benchmark para evaluar las propuestas que recibamos: si una propuesta se aleja mucho de este esquema, conviene preguntar el porqué antes de descartarla.
+- `prd-itabey-asha-es.md` y `prd-itabey-asha-en.md` — PRD técnico completo, en español e inglés. Incluye requisitos funcionales numerados, requisitos no funcionales, restricciones, criterios de evaluación de proveedores y anexo de tiers preliminar.
+- `arquitectura-preliminar.md` — Propuesta arquitectónica preliminar como benchmark para evaluar las propuestas que recibamos.
 
-## Pendiente para tomar decisión
+## Sobre el análisis de evolución del coste de IA
 
-Hay tres puntos sobre los que necesito tu decisión antes de cerrar la entrega definitiva al desarrollador. Los dos primeros son críticos.
+Es la conversación que abriste y a la que dediqué un análisis específico. Lo que la documentación recoge:
 
-### 1. Colchón financiero para evolución del coste de IA
+- Las **cuatro fuerzas estructurales** que las fuentes sectoriales identifican como motores de subida del coste neto en horizonte 2–4 años (cuello de botella energético e infraestructura física, normalización post-subsidio, crecimiento del consumo, modelos de frontera).
+- La **deflación del precio por token** que sigue cayendo en paralelo, pero no compensa la suma de las cuatro fuerzas anteriores.
+- Los **escenarios cuantitativos** con porcentajes sobre el coste actual (subida controlada +50% a +100%, subida intensa +200% a +400%, subida descontrolada +400% a +700%+).
+- Las **opciones de plan financiero** para absorber distintos escenarios: mantener ronda con colchón actual, ampliar ronda con colchón reforzado, mantener ronda con pricing absorbente desde el inicio, o combinaciones.
 
-Es el punto más importante. Mi análisis con fuentes (Moody's, Goldman Sachs, Gartner) indica que **el coste neto de operar IA va a subir estructuralmente** en horizonte 2–4 años. La magnitud depende de la arquitectura:
+La decisión sobre cuál de estas opciones encaja mejor con la estrategia financiera y la conversación con inversores te corresponde a ti y a tu equipo financiero. Las consecuencias técnicas de cada opción ya están reflejadas en la arquitectura (mix híbrido obligatorio, capacidad de switch entre proveedores, cuotas por tier, instrumentación desde el día 1).
 
-- Escenario controlado: +50% a +100% sobre el coste actual (+75.000 a +150.000 € anuales en el escenario base).
-- Escenario intenso: +200% a +400% (+300.000 a +600.000 € anuales).
-- Escenario descontrolado (arquitectura monolítica): +400% a +700%+ (+600.000 € anuales o más).
+## Sobre la posición regulatoria (HIPAA y despliegue inicial)
 
-Tres opciones para el plan financiero:
+El cambio de mercado prioritario a hispanohablantes en EE. UU. tiene implicaciones regulatorias que conviene cerrar con tu asesoría legal especializada en healthtech. El PRD ya las contempla técnicamente:
 
-- **A** — Mantener la ronda seed actual (1,5 M €) con el colchón propuesto (150.000–300.000 € específicos para IA). Cubre escenario controlado y parte del intenso. Exposición al riesgo si el escenario intenso se materializa.
-- **B** — Ampliar la ronda en 200.000–400.000 € adicionales específicamente para colchón IA reforzado (~400.000–700.000 € totales). Cubre escenario intenso con margen. Más conservador.
-- **C** — Mantener la ronda y diseñar pricing absorbente desde el día 1 (cuotas por tier y B2B basado en consumo). Más arriesgado: depende de capacidad real de subir precios sin perder usuarias.
+- Si los datos de usuarias residentes en EE. UU. se procesan en infraestructura europea, la complejidad HIPAA es menor.
+- Si los datos se procesan físicamente en EE. UU. desde el MVP, HIPAA debe estar contemplado desde el lanzamiento, con implicaciones de coste y plazo.
 
-Mi recomendación es una combinación de **B + C**: ampliar la ronda en ~250.000 € y diseñar el pricing desde el inicio para poder absorber inflación. Pero la decisión es tuya, en función del apetito de riesgo y de cómo lo veas con el inversor.
-
-### 2. HIPAA / despliegue inicial en EE. UU.
-
-El cambio de mercado prioritario a hispanohablantes en EE. UU. activa cumplimiento HIPAA si vamos a procesar datos de personas físicamente residentes allí. Conviene aclarar:
-
-- ¿El MVP procesará datos de usuarias residentes en EE. UU. **desde el día 1**? En ese caso, HIPAA debe estar contemplado desde el lanzamiento.
-- ¿O la primera fase es "marketing en EE. UU. con procesamiento en UE"? En ese caso, HIPAA llegaría más tarde.
-
-Cada respuesta cambia el plazo del MVP y el coste de cumplimiento.
-
-### 3. Tres preguntas no bloqueantes
-
-Estas no impiden seguir avanzando, pero conviene tenerlas en mente:
-
-- **Q9** — Contenidos definitivos de cada tier (free vs premium). Propuesta: revisarlos tras 3 meses de uso real con cohorte de validación.
-- **Q12** — Catálogo inicial de apps externas recomendables (Fase 2). Sin partners identificados aún.
-- **Q14** — Branding de la adaptación masculina (bajo Itabey o marca distinta). Decisión abierta hasta Fase 3.
+La decisión sobre el modelo concreto de procesamiento y jurisdicción corresponde a la conversación con tu asesoría legal. Cuando se cierre y haya consecuencias técnicas adicionales que reflejar en la documentación, las integro.
 
 ## Próximos pasos
 
-Una vez confirmes las decisiones sobre colchón financiero (1) y HIPAA (2), integro las consecuencias en la documentación —Rev 5 del PRD si hace falta— y queda todo listo para enviar a la empresa desarrolladora.
+La documentación técnica está completa para las tres audiencias. Cualquier ajuste que surja de tus conversaciones con inversores, asesoría financiera, asesoría legal o equipo de producto, dímelo y lo paso por el repositorio en una Revisión 5 si hace falta.
 
-Cualquier comentario, corrección o ajuste sobre cualquiera de los documentos, dímelo y lo paso por el repositorio.
+Si quieres que repasemos algún punto del PRD o del análisis del coste de IA en una sesión, también estoy disponible para ello.
 
 Un abrazo,
 Alex

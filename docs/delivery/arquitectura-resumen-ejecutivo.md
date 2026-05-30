@@ -163,7 +163,7 @@ Cuatro hechos que dicen las fuentes sectoriales (Moody's, Goldman Sachs, Gartner
 
 **No es el mercado lo que decide en cuál de los tres escenarios cae Itabey: es la decisión arquitectónica.** Por eso esta propuesta insiste tanto en el mix híbrido y en la capacidad de switch entre proveedores.
 
-**Implicación financiera concreta**: conviene reservar dentro de la ronda seed un colchón equivalente a 12-24 meses del coste de IA previsto para el escenario base (estimado en ~150.000-300.000 €), además del colchón general. Tres opciones que te he detallado en email aparte (A: mantener ronda, B: ampliar 200-400K específicamente para colchón IA, C: pricing absorbente desde día 1). La decisión es tuya.
+**Implicación financiera**: el análisis indica que para absorber el escenario controlado o intenso con margen razonable, sería coherente reservar dentro de la ronda seed un colchón específico para IA equivalente a entre 12 y 24 meses del coste previsto del escenario base (estimado en aproximadamente 150.000-300.000 €), además del colchón general de contingencia. La decisión sobre el dimensionamiento concreto del colchón y sobre si tiene sentido ampliar la ronda o ajustar el pricing del producto para absorber subidas corresponde al equipo financiero del proyecto.
 
 ---
 
